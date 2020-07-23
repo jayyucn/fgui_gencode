@@ -13,13 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fast_xml_parser_1 = __importDefault(require("fast-xml-parser"));
+// import XMLP from 'xml2js'
+require('xml2js');
+const he_1 = __importDefault(require("he"));
 class Parser {
     static ParseXml(xmlString) {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve) => {
                 let file = fast_xml_parser_1.default.parse(xmlString, Parser.options);
-                console.log(file.component.displayList);
-                resolve && resolve(file);
+                console.log(file);
+                resolve(file);
             });
         });
     }
@@ -39,7 +42,7 @@ Parser.options = {
     cdataPositionChar: "\\c",
     parseTrueNumberOnly: false,
     arrayMode: false,
-    // attrValueProcessor: (val,attrName) => He.decode(val,{isAttributeValue: true}),//default is a=>a
-    // tagValueProcessor: (val,tagName) => He.decode(val), //default is a=>a
+    attrValueProcessor: (val, attrName) => he_1.default.decode(val, { isAttributeValue: true }),
+    tagValueProcessor: (val, tagName) => he_1.default.decode(val),
     stopNodes: ["parse-me-as-string"]
 };

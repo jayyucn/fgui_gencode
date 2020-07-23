@@ -1,4 +1,4 @@
-import Package from './Package';
+import PackageReader from '../reader/PackageReader';
 export default class PackageInfoMgr {
 
     private static _Instance: PackageInfoMgr;
@@ -8,12 +8,12 @@ export default class PackageInfoMgr {
         return this._Instance;
     }
     
-    packages: Package[] = [];
+    packages: PackageReader[] = [];
 
     
     public Init(packagesPaths: string[]) {
         for(let path of packagesPaths) {
-            let pkg = new Package(path);
+            let pkg = new PackageReader(path);
             this.packages.push(pkg);
         }
     }

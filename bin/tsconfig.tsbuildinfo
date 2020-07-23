@@ -187,18 +187,18 @@
         "affectsGlobalScope": false
       },
       "../src/generator/xmlfile.ts": {
-        "version": "ec763786b81a07d1da2931564d03a19e6b070f84cc524810c0bc5901e39f8a45",
-        "signature": "8daba658276d220ac95518ebb5b36478c22729806a5b07f18af8892e85eb2ce9",
+        "version": "c5e72d09eb529c288cc8bf1921f73a60f8cc3a69b5d0d7cbbb2fb95960227d00",
+        "signature": "66affa29036a3a1fbd9ddb53c134fe0e7b2344e34863d6d7110409aa5cd68416",
         "affectsGlobalScope": false
       },
       "../src/generator/parser.ts": {
-        "version": "7564dba53d5f0b41538bdef487272493d59607c1ad7ae26b2fe683971cde69fb",
-        "signature": "39b32924bf49c8f4f12eabc21e77cf919ed8dddddc0a08e063c03d13667ee940",
+        "version": "ace71789b5c99d6ab02eab800f0ec12ac8d218844c157c5e62411041a618f264",
+        "signature": "7327fa64df89109ee213efc8af374a46d4d6c111572510cc56e91f75b5e101b2",
         "affectsGlobalScope": false
       },
       "../src/generator/package.ts": {
-        "version": "25f696f9fc6d04cfdd290b37e69f62123ef42eaf386a7ef4f7ccf814ca216ba2",
-        "signature": "a8089bc1aaa14d39499b84950fb76b86d749c8b46cf62d9ca49ca42238022877",
+        "version": "e1e68aae9a690640ff103a0cbfa87dbde8f798044148c2f4c8da1b482518af9d",
+        "signature": "d851b0a7bf259a5c3c4de27e9bf7c1682d3a095db6ddb1c5422e35952f52a592",
         "affectsGlobalScope": false
       },
       "../src/generator/packageinfomgr.ts": {
@@ -207,7 +207,7 @@
         "affectsGlobalScope": false
       },
       "../src/main.ts": {
-        "version": "976b506b38b230ddedd024a40c6d21a603282b4f0ad5d8ab357148750911cfc0",
+        "version": "030eaf22134e025e753a68a738a34a80b7fba7e9f86fb502f9adfa6f6d69bf4f",
         "signature": "6b7c7975aa2ab8cf66b75e1c7d5fb7abef3cfceab310fccbf1aa2e27df8f8835",
         "affectsGlobalScope": false
       },
@@ -476,8 +476,8 @@
       "incremental": true,
       "target": 2,
       "module": 1,
-      "allowJs": true,
       "outDir": "./",
+      "strict": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
@@ -2128,6 +2128,9 @@
       ],
       "../src/generator/packageinfomgr.ts": [
         "../src/generator/package.ts"
+      ],
+      "../src/generator/parser.ts": [
+        "../src/generator/xmlfile.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [

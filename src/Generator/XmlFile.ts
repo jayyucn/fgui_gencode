@@ -1,14 +1,43 @@
-export default class XmlFile {
-    
-}
+import ResourceComponent from "../data/ResourceComponent";
 
-export interface IXmlFile {
+
+export interface XmlDocument {
+    packageDescription: IpackageDescription;
     component: IComponent;
 }
 
+export interface IpackageDescription {
+    resources: Iresources;
+    id: string;
+    publish?:IPublish;
+}
+export interface IPublish {
+    name: string;
+    genCode: string;
+}
+
+export interface Iresources {
+    image: INode | INode[];
+    component: INode | INode[];
+}
+
+export interface INode{
+    id: string;
+    name: string;
+    path: string;
+    exported: string;
+}
+
+
 export interface IComponent {
-    controller?: any
+    transition: ICNode;
+    controller?: ICNode;
+    extention: string;
     displayList: IDisplayList
+}
+
+export interface ICNode {
+
 }
 
 export interface IDisplayList {
