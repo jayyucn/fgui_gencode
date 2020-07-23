@@ -1,3 +1,4 @@
+"use strict";
 var str = `<?xml version="1.0" encoding="utf-8"?>
 <component size="1334,750" designImage="ui://vdfkrc9uwz4wv" designImageAlpha="0">
   <displayList>
@@ -67,4 +68,6 @@ var str = `<?xml version="1.0" encoding="utf-8"?>
 </component>`;
 let reg = /pkg="\w{8}"/g;
 let res = str.match(reg);
+reg = /^n[0-9]+$/;
+res = reg.test('n121');
 console.log(res);

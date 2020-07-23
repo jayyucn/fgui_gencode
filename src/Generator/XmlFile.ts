@@ -30,8 +30,8 @@ export interface INode{
 
 
 export interface IComponent {
-    transition: ICNode;
-    controller?: ICNode;
+    transition: any;
+    controller?: any;
     extention: string;
     displayList: IDisplayList
 }

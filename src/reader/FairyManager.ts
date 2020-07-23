@@ -64,7 +64,7 @@ export default class FairyManager
         return null;
     }
 
-    public LoadProject(projectPath: string)
+    public async LoadProject(projectPath: string)
     {
         let root = projectPath + "/assets";
         let dirs: string[] = FS.GetDirectories(root);
@@ -74,7 +74,8 @@ export default class FairyManager
             let packageXmlPath = dirs[i] + "/package.xml";
             if(FS.Exists(packageXmlPath))
             {
-                let pkg: Package = PackageReader.Load(packageXmlPath);
+                let xmlStr = FS.ReadXml(packageXmlPath);
+                let pkg: Package = await PackageReader.Load(xmlStr);
                 this.AddPackage(pkg);
             }
         }
@@ -194,13 +195,13 @@ export default class FairyManager
     private ExportTSExportGuiPackageNames()
     {
 
-        TSExportGuiPackageNames.Export(packageList);
+        // TSExportGuiPackageNames.Export(packageList);
     }
 
     private ExportTSExportGuiBinderList()
     {
 
-        TSExportGuiBinderList.Export(packageList);
+        // TSExportGuiBinderList.Export(packageList);
     }
 
     private ExportTSExportSoundKey()

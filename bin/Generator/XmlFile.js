@@ -1,9 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NodeName = void 0;
-class XmlFile {
-}
-exports.default = XmlFile;
 var NodeName;
 (function (NodeName) {
     NodeName["controller"] = "controller";

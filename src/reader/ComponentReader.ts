@@ -1,11 +1,11 @@
 import ResourceComponent from "../data/ResourceComponent";
 import Parser from "../Generator/Parser";
 import {fgui} from "../data/FguiComponentType";
-import CNode from '../data/CNode';
+import CNode, { ComponentNode } from '../data/CNode';
 
 export default class ComponentReader
 {
-    public static Load(path: string,resourceComponent: ResourceComponent)
+    public static async Load(path: string,resourceComponent: ResourceComponent)
     {
         console.log("ComponentReader:" + path);
         
@@ -28,82 +28,90 @@ export default class ComponentReader
                 {
                     // 控制器
                     case fgui.NodeName.controller:
-                        resourceComponent.controllerList.push(new CNode(name,fgui.CommonName.Controller));
+                        resourceComponent.transitionList.push(new CNode({
+                            name:name,
+                            type:fgui.CommonName.Controller
+                        }));
                         break;
                     // 动效
                     case fgui.NodeName.transition:
-                        resourceComponent.transitionList.push(new CNode(name,fgui.CommonName.Transition));
+                        resourceComponent.transitionList.push(new CNode({
+                            name:name,
+                            type:fgui.CommonName.Transition
+                        }));
                         break;
                     case fgui.NodeName.displayList:
-                        let displayNodeList = node.ChildNodes;
                         let displayListKeys = Object.keys(node);
                         for(let dkey of displayListKeys)
                         {
                             let displayNode = node[dkey];
                             let pkg = null;
                             let src = null;
+                            let type = "";
                             let nodeName = displayNode.name;
+                            let isComponent: boolean = false;
                             switch(dkey) {
                                 // 图片
                                 case fgui.NodeName.image:
                                     displayNode.pkg && (pkg = displayNode.pkg);
                                     displayNode.src && (pkg = displayNode.src);
-                                    resourceComponent.displayList.push(new CNode(nodeName,fgui.CommonName.GImage,pkg,src));
+                                    type = fgui.CommonName.GImage;
                                     break;
                                 // 文本
                                 case fgui.NodeName.text:
                                     let input = false;
                                     displayNode.input && (input = displayNode.input == "true");
                                     if(input)
-                                        resourceComponent.displayList.push(new CNode(nodeName,fgui.CommonName.GTextInput));
+                                        type = fgui.CommonName.GTextInput;
                                     else
-                                        resourceComponent.displayList.push(new CNode(nodeName,fgui.CommonName.GTextField));
+                                        type = fgui.CommonName.GTextField;
                                     break;
                                 // 富文本
                                 case fgui.NodeName.richtext:
-                                    resourceComponent.displayList.push(new CNode(nodeName,fgui.CommonName.GRichTextField));
+                                        type = fgui.CommonName.GRichTextField;
                                     break;
                                 // 图形
                                 case fgui.NodeName.graph:
-                                    resourceComponent.displayList.push(new CNode(nodeName,fgui.CommonName.GGraph));
+                                        type = fgui.CommonName.GGraph;
                                     break;
                                 // 组
                                 case fgui.NodeName.group:
                                     let advanced = false;
                                     displayNode.advanced && (input = displayNode.advanced == "true");
                                     if(advanced)
-                                        resourceComponent.displayList.push(new CNode(nodeName,fgui.CommonName.GGroup));
+                                        type = fgui.CommonName.GGroup;
                                     break;
-
                                 // 装载器
                                 case fgui.NodeName.loader:
-                                    resourceComponent.displayList.push(new Node() {name = nodeName,type = fgui.CommonName.GLoader});
+                                        type = fgui.CommonName.GLoader;
                                     break;
-
                                 // 列表
                                 case fgui.NodeName.list:
-                                    resourceComponent.displayList.Add(new Node() {name = nodeName,type = fgui.CommonName.GList});
+                                        type = fgui.CommonName.GList;
                                     break;
-
                                 // 序列帧动画
                                 case fgui.NodeName.movieclip:
-                                    resourceComponent.displayList.Add(new Node() {name = nodeName,type = fgui.CommonName.GMovieClip});
+                                        type = fgui.CommonName.GMovieClip;
                                     break;
-
                                 // 自定义组件
                                 case fgui.NodeName.component:
-                                    pkg = null;
-                                    if(displayNode.Attributes["pkg"] != null)
-                                    {
-                                        pkg = displayNode.Attributes.GetNamedItem("pkg").InnerText;
-                                    }
-                                    resourceComponent.AddNode(new ComponentNode() {
-                                        name = nodeName,type = fgui.CommonName.GComponent,
-                                        pkg = pkg,
-                                        src = displayNode.Attributes.GetNamedItem("src").InnerText
-                                    });
+                                    isComponent = true;
+                                    displayNode.pkg && (pkg = displayNode.pkg);
+                                    displayNode.src && (src = displayNode.src);
+                                        type = fgui.CommonName.GComponent;
+                                        resourceComponent.AddNode(new ComponentNode({
+                                            name: nodeName,
+                                            type: type,
+                                            pkg: pkg,
+                                            src: src
+                                        }));
                                     break;
-
+                            }
+                            if(!isComponent) {
+                                resourceComponent.displayList.push(new CNode({
+                                    name: nodeName,
+                                    type:fgui.CommonName.GImage,pkg,src
+                                }));
                             }
                         }
                         break;

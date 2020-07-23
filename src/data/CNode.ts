@@ -4,9 +4,16 @@ import {fgui} from "./FguiComponentType";
 
 export default class CNode {
 
-    constructor(name: string, type: string, pkg: string = "", src: string = "") {
-        this.name = name;
-        this.type = type;
+    constructor(param: {
+        name: string,
+        type: string,
+        pkg?: string, 
+        src?: string
+    }) {
+        this.name = param.name;
+        this.type = param.type;
+        this.pkg = param.pkg?param.pkg:"";
+        this.src = param.src?param.src:"";
     }
     
     public name: string = "";
@@ -35,6 +42,16 @@ export default class CNode {
 }
 
 export class ComponentNode extends CNode {
+
+    constructor(param:{
+        name: string,
+        type: string,
+        pkg: string, 
+        src: string
+    }) {
+        super(param)
+    }
+    
     public parent: ResourceComponent;
     public resourceComponent: ResourceComponent;
 

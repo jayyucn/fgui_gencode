@@ -6,6 +6,10 @@ import {dir} from 'console';
 export default class FS
 {
 
+    public static ReadXml(path):string {
+        return readFileSync(path, {encoding: 'utf-8'});
+    }
+
     public static ReaddirSync(url: string,includeFileTypes: string[] = [],excludeFileTypes: string[] = [])
     {
         let list: string[] = [];

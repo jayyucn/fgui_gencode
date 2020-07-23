@@ -13,8 +13,8 @@ export default class PackageInfoMgr {
     
     public Init(packagesPaths: string[]) {
         for(let path of packagesPaths) {
-            let pkg = new PackageReader(path);
-            this.packages.push(pkg);
+            // let pkg = new PackageReader(path);
+            // this.packages.push(pkg);
         }
     }
 

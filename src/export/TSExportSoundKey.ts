@@ -15,16 +15,16 @@ export default class TSExportSoundKey
             coms.push([component.classNameExtend,component.name,component.id,FS.GetExtension(component.name)]);
         }
 
-        TsPathTemplate.SoundKey
-        TemplateSystem template = new TemplateSystem(File.ReadAllText(TsPathTemplate.SoundKey));
-        template.AddVariable("packageName",pkg.name);
-        template.AddVariable("packageId",pkg.id);
-        template.AddVariable("list",coms.ToArray());
-        string content = template.Parse();
-        string path = TsPathOut.SoundKey;
+        // TsPathTemplate.SoundKey
+        // TemplateSystem template = new TemplateSystem(File.ReadAllText(TsPathTemplate.SoundKey));
+        // template.AddVariable("packageName",pkg.name);
+        // template.AddVariable("packageId",pkg.id);
+        // template.AddVariable("list",coms.ToArray());
+        // string content = template.Parse();
+        // string path = TsPathOut.SoundKey;
 
-        PathHelper.CheckPath(path);
-        File.WriteAllText(path,content);
+        // PathHelper.CheckPath(path);
+        // File.WriteAllText(path,content);
     }
 }
 

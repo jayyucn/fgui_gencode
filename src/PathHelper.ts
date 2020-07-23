@@ -26,30 +26,26 @@ export default class PathHelper
         }
     }
 
-    public static string ChangeExtension(string path,string ext)
+    public static  ChangeExtension( path:string, ext:string): string
     {
-        string e = Path.GetExtension(path);
-        if(string.IsNullOrEmpty(e))
+        let e = FS.GetExtension(path);
+        if(!e)
         {
             return path + ext;
         }
 
-        bool backDSC = path.IndexOf('\\') != -1;
-        path = path.Replace('\\','/');
-        if(path.IndexOf('/') == -1)
+        let backDSC = path.indexOf('\\') != -1;
+        path = path.replace('\\','/');
+        if(path.indexOf('/') == -1)
         {
-            return path.Substring(0,path.LastIndexOf('.')) + ext;
+            return path.substring(0,path.lastIndexOf('.')) + ext;
         }
-
-        string dir = path.Substring(0,path.LastIndexOf('/'));
-        string name = path.Substring(path.LastIndexOf('/'),path.Length - path.LastIndexOf('/'));
-        name = name.Substring(0,name.LastIndexOf('.')) + ext;
+        let dir = path.substring(0,path.lastIndexOf('/'));
+        let name = path.substring(path.lastIndexOf('/'),path.length - path.lastIndexOf('/'));
+        name = name.substring(0,name.lastIndexOf('.')) + ext;
         path = dir + name;
-
         if(backDSC)
-        {
-            path = path.Replace('/','\\');
-        }
+            path = path.replace('/','\\');
         return path;
     }
 }

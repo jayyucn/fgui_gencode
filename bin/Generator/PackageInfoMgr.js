@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Package_1 = __importDefault(require("./Package"));
 class PackageInfoMgr {
     constructor() {
         this.packages = [];
@@ -15,8 +11,8 @@ class PackageInfoMgr {
     }
     Init(packagesPaths) {
         for (let path of packagesPaths) {
-            let pkg = new Package_1.default(path);
-            this.packages.push(pkg);
+            // let pkg = new PackageReader(path);
+            // this.packages.push(pkg);
         }
     }
 }
