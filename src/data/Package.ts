@@ -33,7 +33,7 @@ export default class Package {
     
     public GetResource(resId: string): ResourceComponent {
         if(this.resources.has(resId))
-            return this.resources[resId];
+            return this.resources.get(resId);
         return null;
     }
 

@@ -6,7 +6,7 @@ import {dir} from 'console';
 export default class FS
 {
 
-    public static ReadXml(path):string {
+    public static ReadXml(path: string):string {
         return readFileSync(path, {encoding: 'utf-8'});
     }
 

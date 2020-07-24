@@ -25,7 +25,7 @@ export default class FairyManager
     {
         if(this.packages.has(packageId))
         {
-            return this.packages[packageId];
+            return this.packages.get(packageId);
         }
         return null;
     }
@@ -74,8 +74,7 @@ export default class FairyManager
             let packageXmlPath = dirs[i] + "/package.xml";
             if(FS.Exists(packageXmlPath))
             {
-                let xmlStr = FS.ReadXml(packageXmlPath);
-                let pkg: Package = await PackageReader.Load(xmlStr);
+                let pkg: Package = await PackageReader.Load(packageXmlPath);
                 this.AddPackage(pkg);
             }
         }

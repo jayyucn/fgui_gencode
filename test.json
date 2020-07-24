@@ -1,9 +1,0 @@
-{
-    component:
-    {
-        '$': { size: '80,80', pivot: '0.5,0.5', extention: 'Button' },
-        controller: [[Object]],
-            displayList: [[Object]],
-                Button: [[Object]]
-    }
-}

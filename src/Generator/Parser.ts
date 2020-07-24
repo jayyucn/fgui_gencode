@@ -22,12 +22,9 @@ export default class Parser
         stopNodes: ["parse-me-as-string"]
     };
 
-    static async ParseXml(xmlString: string): Promise<XmlDocument> {
-        return new Promise<XmlDocument>((resolve)=>{
+    static ParseXml(xmlString: string): XmlDocument {
             let file: XmlDocument = XmlParser2.parse(xmlString,Parser.options)
-            console.log(file.packageDescription.resources);
-            resolve(file);
-        })
+            return file;
     }
 
 

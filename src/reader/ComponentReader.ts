@@ -5,11 +5,11 @@ import CNode, { ComponentNode } from '../data/CNode';
 
 export default class ComponentReader
 {
-    public static async Load(path: string,resourceComponent: ResourceComponent)
+    public static Load(path: string,resourceComponent: ResourceComponent)
     {
         console.log("ComponentReader:" + path);
         
-        let xmlDocument = await Parser.ParseXml(path);
+        let xmlDocument = Parser.ParseXml(path);
 
         let component = xmlDocument.component;
         // 继承

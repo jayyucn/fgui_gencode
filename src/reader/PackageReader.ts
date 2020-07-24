@@ -6,12 +6,13 @@ import ResourceComponent from '../data/ResourceComponent';
 
 export default class PackageReader
 {
-    public static async Load(path: string): Promise<Package>
+    public static Load(path: string): Package
     {
         console.log("PackageReader:" + path);
+        let xmlStr = FS.ReadXml(path);
         let pkg: Package = new Package();
-        pkg.rootPath = FS.GetDirectoryName(path);
-        let xmlDocument = await Parser.ParseXml(path);
+        pkg.rootPath = FS.GetDirectoryName(xmlStr);
+        let xmlDocument = Parser.ParseXml(xmlStr);
         let packageDescription = xmlDocument.packageDescription;
         let publish = xmlDocument.packageDescription.publish;
 
@@ -26,13 +27,13 @@ export default class PackageReader
         }
         else
         {
-            pkg.name = FS.GetFileNameWithoutExtension(FS.GetDirectoryName(path));
+            pkg.name = FS.GetFileNameWithoutExtension(FS.GetDirectoryName(xmlStr));
         }
         let resources = packageDescription.resources;
         let keys = Object.keys(resources);
         for(let key of keys)
         {
-            let node = <INode>resources[key];
+            let node = resources[key];
 
             let item = new ResourceComponent(node);
 
