@@ -3,15 +3,18 @@
 // http://blog.ihaiu.com
 /////////////////////////////////////
 
-namespace >:namespace:<
+
+>:FOREACH imports:<
+import >:[0]:< from ">:[1]:<";
+>:ENDFOREACH:<
+
+export default class >:className:<
 {
-	export class >:className:<
+	public static bindAll():void 
 	{
-		public static bindAll():void 
-		{
-			>:FOREACH coms:<
-			fairygui.UIObjectFactory.setPackageItemExtension(>:[0]:<.URL, >:[0]:<);
-			>:ENDFOREACH:<
-		}
+		let bind = fgui.UIObjectFactory.setPackageItemExtension;
+		>:FOREACH coms:<
+		bind(>:[0]:<.URL, >:[0]:<);
+		>:ENDFOREACH:<
 	}
 }

@@ -35,7 +35,7 @@ export default class FairyManager
     {
         if(this.packagesByName.has(packageName))
         {
-            return this.packagesByName[packageName];
+            return this.packagesByName.get(packageName);
         }
         return null;
     }

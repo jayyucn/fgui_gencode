@@ -3,9 +3,10 @@
 // http://blog.ihaiu.com
 /////////////////////////////////////
 
-namespace >:namespace:<
+>:FOREACH imports:<
+import >:[0]:< from ">:[1]:<";
+>:ENDFOREACH:<
+
+export default class >:classNameExtend:< extends >:classNameStruct:<
 {
-	export class >:classNameExtend:< extends >:classNameStruct:<
-	{
-	}
 }

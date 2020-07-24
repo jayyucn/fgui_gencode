@@ -46,6 +46,7 @@ export class TemplateSystem
 
     public Parse(): string
     {
+        console.log('-------sss-----', this.replaces)
         let lines: string[] = this.targetTemplate.replace("\r\n","\n").split('\n');
 
         let finalLines: string[] = [];
@@ -74,7 +75,7 @@ export class TemplateSystem
                 let contents = current.substring(parseStart,parseEnd);
                 let tmp = parseStr.split('');
                 tmp.splice(parseStart - 2,parseEnd - parseStart + 4);
-                parseStr = tmp.join('').trim();
+                parseStr = tmp.join('');
                 if(this.CheckState(contents,foundState))
                 {
                     skipLine = true;
@@ -122,7 +123,7 @@ export class TemplateSystem
                 finalLines.push(built);
         }
 
-        return finalLines.join('\r\n');
+        return finalLines.join('\n');
     }
 
     private CheckState(contents: string,foundState: State): boolean
@@ -158,9 +159,10 @@ export class TemplateSystem
             this.iteratee = this.replaces.get(iterateeName);
 
             if(!(this.iteratee instanceof Array)) {
+                console.log("iteratee = ",this.iteratee, iterateeName);
                 this.iteratee;
             }
-            if(this.iteratee.length == 0)
+            if(!this.iteratee || this.iteratee.length == 0)
                 this.emptyArray = true;
 
             this.currentIterateeIndex = 0;
@@ -179,7 +181,7 @@ export class TemplateSystem
             if(!this.replaces.has(iterateeName))
                 console.error("No variable with the name " + iterateeName + " could be located");
 
-            this.iteratee = this.replaces[iterateeName];
+            this.iteratee = this.replaces.get(iterateeName);
 
             if(this.iteratee.length == 0 || (this.iteratee[0]).length == 0)
                 this.emptyArray = true;
@@ -219,7 +221,7 @@ export class TemplateSystem
         }
 
         if(this.replaces.has(contents))
-            return this.FormatReturn(this.replaces[contents]);
+            return this.FormatReturn(this.replaces.get(contents));
 
         return "";
     }

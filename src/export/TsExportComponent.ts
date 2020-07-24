@@ -20,6 +20,8 @@ export default class TsExportComponent
     public Export()
     {
         this.name = this.com.className;
+        // if(this.name != "ServerPanel.xml" && this.name != "LoginWindowUI.xml")
+        //     return
         this.ExportStruct();
         this.ExportExtend();
     }
@@ -84,7 +86,7 @@ export default class TsExportComponent
 
 
         let template = new TemplateSystem(FS.ReadTxt(TsPathTemplate.ComponentStruct));
-        template.AddVariable("namespace", com.nameSpace);
+        template.AddVariable("imports", com.imports);
         template.AddVariable("classNameFGUI", com.classNameFGUI);
         template.AddVariable("classNameStruct", com.classNameStruct);
         template.AddVariable("classNameExtend", com.classNameExtend);

@@ -3,9 +3,16 @@
 // http://blog.ihaiu.com
 /////////////////////////////////////
 
-function fguiBinderAll()
+>:FOREACH imports:<
+import >:[0]:< from ">:[1]:<";
+>:ENDFOREACH:<
+
+export default class GuiBinderList
 {
-	>:FOREACH packlist:<
-	>:[0]:<
-	>:ENDFOREACH:<
+	static fguiBinderAll()
+	{
+		>:FOREACH packlist:<
+		>:[0]:<
+		>:ENDFOREACH:<
+	}
 }

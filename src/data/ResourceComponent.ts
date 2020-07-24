@@ -101,6 +101,16 @@ export default class ResourceComponent
         this._className = name;
     }
 
+    private _imports: string[];
+    public get imports(): string[]
+    {
+        if(!this._imports)
+        {
+            this._imports = [this.classNameExtend, this.classNameStruct];
+        }
+        return this._imports;
+    }
+
     private _extendClassName: string;
     public get extendClassName(): string
     {

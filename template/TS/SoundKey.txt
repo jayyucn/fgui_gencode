@@ -3,8 +3,9 @@
 // http://blog.ihaiu.com
 /////////////////////////////////////
 
+import GuiSetting from "../GuiSetting";
 
-class SoundKey
+export default class SoundKey
 {
 	private static _idDict: Dictionary<string, string>;
 	static get idDict(): Dictionary<string, string>
@@ -45,7 +46,7 @@ class SoundKey
 
 	public static getPath(key: string): string
 	{
-		return Games.GuiSetting.getResPath(`${SoundKey.SoundPackageName}@${SoundKey.getId(key)}${SoundKey.extDict.getValue(key)}`, "fgui")
+		return GuiSetting.getResPath(`${SoundKey.SoundPackageName}_${SoundKey.getId(key)}${SoundKey.extDict.getValue(key)}`, "fgui")
 	}
 
 
