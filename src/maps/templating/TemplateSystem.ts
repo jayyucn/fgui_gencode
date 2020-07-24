@@ -29,7 +29,7 @@ export class TemplateSystem
     private replaces: Map<string,string> = new Map<string,string>();
 
     private state: State = State.None;
-    private iteratee: string[] = [];
+    private iteratee: any;
     private currentIterateeIndex = 0;
     private loopStart = -1;
     private emptyArray = false;
@@ -53,15 +53,15 @@ export class TemplateSystem
         let parsed: boolean = false;
         let skipLine: boolean = false;
         let foundState: State = State.None;
-        let line: string = "";
+        let parseStr: string = "";
         for(let i = 0;i < lines.length;i++)
         {
-            line = lines[i];
+            parseStr = lines[i];
             parsed = false;
             skipLine = false;
             while(true)
             {
-                let current = line;
+                let current = parseStr;
                 let parseStart = current.indexOf(">:",offset);
                 if(parseStart < 0)
                     break;
@@ -72,9 +72,9 @@ export class TemplateSystem
                     console.error("There was a parse start but no end on line " + (i + 1));
 
                 let contents = current.substring(parseStart,parseEnd);
-
-                line = line.slice(parseStart - 2,parseEnd - parseStart + 4);
-
+                let tmp = parseStr.split('');
+                tmp.splice(parseStart - 2,parseEnd - parseStart + 4);
+                parseStr = tmp.join('').trim();
                 if(this.CheckState(contents,foundState))
                 {
                     skipLine = true;
@@ -106,15 +106,15 @@ export class TemplateSystem
 
                 if(!this.emptyArray)
                 {
-                    let tmp = line.split('');
+                    let tmp = parseStr.split('');
                     tmp.splice(parseStart - 2,0,this.ParseLine(contents));
-                    line = tmp.join('');
+                    parseStr = tmp.join('');
                 }
 
                 parsed = true;
             }
 
-            let built = line;
+            let built = parseStr;
 
             if(parsed && built.trim().length == 0)
                 lines.splice(i--,1);
@@ -150,14 +150,17 @@ export class TemplateSystem
 
             this.state |= State.ForEach;
 
-            let iterateeName = contents.slice(7);
+            let iterateeName = contents.slice(7).trim();
 
             if(!this.replaces.has(iterateeName))
                 console.error("No variable with the name " + iterateeName + " could be located");
 
-            this.iteratee = this.replaces[iterateeName];
+            this.iteratee = this.replaces.get(iterateeName);
 
-            if(this.iteratee &&this.iteratee.length == 0)
+            if(!(this.iteratee instanceof Array)) {
+                this.iteratee;
+            }
+            if(this.iteratee.length == 0)
                 this.emptyArray = true;
 
             this.currentIterateeIndex = 0;

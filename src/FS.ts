@@ -1,7 +1,6 @@
 import { readdirSync, statSync, exists, existsSync, readFileSync } from 'fs';
 import * as Fse from 'fs-extra';
 import Config from './Config';
-import {dir} from 'console';
 
 export default class FS
 {
@@ -12,6 +11,8 @@ export default class FS
 
     public static WriteTxt(path: string, content: string)
     {
+        Fse.ensureFileSync(path);
+        Fse.writeFileSync(path,content,{encoding:'utf-8'});
         // return readFileSync(path,{encoding: 'utf-8'});
     }
 

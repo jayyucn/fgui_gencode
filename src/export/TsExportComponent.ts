@@ -97,7 +97,9 @@ export default class TsExportComponent
         template.AddVariable("setDisplayList", setDisplayList);
         template.AddVariable("setTransitionList", setTransitionList);
         let content = template.Parse();
-            let path = this.Format(TsPathOut.ComponentStruct, com.package.codeFolderName, name);
+        let structPath = TsPathOut.ComponentStruct;
+        let folderName = com.package.codeFolderName;
+        let path = this.Format(structPath,[folderName,this.name]);
         FS.CheckPath(path);
         FS.WriteTxt(path, content);
     }
@@ -114,37 +116,23 @@ export default class TsExportComponent
         template.AddVariable("classNameStruct", com.classNameStruct);
         template.AddVariable("classNameExtend", com.classNameExtend);
         let content = template.Parse();
-        let path = this.Format(TsPathOut.ComponentExtend, com.package.codeFolderName, name);
+        let path = this.Format(TsPathOut.ComponentExtend,[com.package.codeFolderName,this.name]);
 
         FS.CheckPath(path);
         FS.WriteTxt(path, content);
     }
 
-    private Format(target:string,...args) {
+    private Format(target:string, args: any[]) {
         var result = target;
-        if(arguments.length > 0)
+        if(args.length > 0)
         {
-            if(arguments.length == 1 && typeof (args) == "object")
+            for(var i = 0;i < args.length;i++)
             {
-                for(var key in args)
+                if(args[i] != undefined)
                 {
-                    if(args[key] != undefined)
-                    {
-                        var reg = new RegExp("({" + key + "})","g");
-                        result = result.replace(reg,args[key]);
-                    }
-                }
-            }
-            else
-            {
-                for(var i = 0;i < arguments.length;i++)
-                {
-                    if(arguments[i] != undefined)
-                    {
-                        //var reg = new RegExp("({[" + i + "]})", "g");//这个在索引大于9时会有问题，谢谢何以笙箫的指出
-                        var reg = new RegExp("({)" + i + "(})","g");
-                        result = result.replace(reg,arguments[i]);
-                    }
+                    //var reg = new RegExp("({[" + i + "]})", "g");//这个在索引大于9时会有问题，谢谢何以笙箫的指出
+                    var reg = new RegExp("({)" + i + "(})","g");
+                    result = result.replace(reg,args[i]);
                 }
             }
         }
