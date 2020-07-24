@@ -21,7 +21,9 @@ export default class Package {
     public AddResource(res: ResourceComponent) {
         res.package = this;
         this.resources.set(res.id, res);
+        // console.log('res.type = ', res.type)
         if(res.type == ResourceComponentType.component) {
+            // console.log(`package resourse length = ${this.components.length}`)
             this.components.push(res);
             if(res.exported) {
                 this.exportComponents.push(res);

@@ -25,7 +25,7 @@ export default class CNode {
     private _fieldName: string = "";
     public get fieldName(): string {
         if(!this._fieldName)
-            this._fieldName = Setting.Options.codeMemberNamePrefix + name;
+            this._fieldName = Setting.Options.codeMemberNamePrefix + this.name;
         return this._fieldName;
     }
 
@@ -41,7 +41,7 @@ export default class CNode {
     }
 }
 
-export class ComponentNode extends CNode {
+export class ComponentNode extends CNode{
 
     constructor(param:{
         name: string,
@@ -49,8 +49,14 @@ export class ComponentNode extends CNode {
         pkg: string, 
         src: string
     }) {
-        super(param)
+        super(param);
     }
+
+    public name: string = "";
+    public type: string = "";
+
+    public pkg: string = "";
+    public src: string = "";
     
     public parent: ResourceComponent;
     public resourceComponent: ResourceComponent;

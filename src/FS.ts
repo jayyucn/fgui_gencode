@@ -5,6 +5,15 @@ import {dir} from 'console';
 
 export default class FS
 {
+    public static ReadTxt(path: string): string
+    {
+        return readFileSync(path,{encoding: 'utf-8'});
+    }
+
+    public static WriteTxt(path: string, content: string)
+    {
+        // return readFileSync(path,{encoding: 'utf-8'});
+    }
 
     public static ReadXml(path: string):string {
         return readFileSync(path, {encoding: 'utf-8'});
@@ -63,13 +72,14 @@ export default class FS
         Fse.ensureDirSync(path);
     }
 
-    public static GetDirectoryName(path: string)
+    public static GetDirectoryPath(path: string)
     {
         if(FS.IsFile(path)) {
-            let dirPath = path.slice(0,path.lastIndexOf('/'))
-            return dirPath.slice(0, dirPath.lastIndexOf('/')+1);
+            return path.slice(0,path.lastIndexOf('/'))
         }
-        return path.slice(path.lastIndexOf('/')+1)
+        if(path.endsWith('/'))
+            return path.slice(0,path.lastIndexOf('/')+1);
+        return path;
     }
 
     public static GetFileNameWithoutExtension(name: string): string {
@@ -88,6 +98,30 @@ export default class FS
     public static IsDirectory(path: string) {
         let stat = statSync(path);
         return stat.isDirectory();
+    }
+
+    public static CheckPath( path:string, isFile = true)
+    {
+        if(isFile) path = path.substring(0,path.lastIndexOf('/'));
+        let dirs: string[] = path.split('/');
+        let target = "";
+
+        let first = true;
+        for(let dir of dirs)
+        {
+            if(first)
+            {
+                first = false;
+                target += dir;
+                continue;
+            }
+            if(dir) continue;
+            target += "/" + dir;
+            if(!FS.Exists(target))
+            {
+                FS.CreateDirectory(target);
+            }
+        }
     }
     
 }

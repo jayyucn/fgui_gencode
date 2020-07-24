@@ -7,6 +7,7 @@ import ResourceComponent from "../data/ResourceComponent";
 import TSExportBinder from "../export/TSExportBinder";
 import Setting from "../Setting";
 import TSExportSoundKey from "../export/TSExportSoundKey";
+import TsExportComponent from "../export/TsExportComponent";
 
 export default class FairyManager
 {
@@ -41,6 +42,8 @@ export default class FairyManager
 
     public GetRescoureComponent(nodeOrId: string | ComponentNode,resId?: string): ResourceComponent
     {
+        if(!nodeOrId)
+            return;
         if(nodeOrId instanceof ComponentNode)
         {
             let node = nodeOrId;
@@ -64,7 +67,7 @@ export default class FairyManager
         return null;
     }
 
-    public async LoadProject(projectPath: string)
+    public  LoadProject(projectPath: string)
     {
         let root = projectPath + "/assets";
         let dirs: string[] = FS.GetDirectories(root);
@@ -74,7 +77,7 @@ export default class FairyManager
             let packageXmlPath = dirs[i] + "/package.xml";
             if(FS.Exists(packageXmlPath))
             {
-                let pkg: Package = await PackageReader.Load(packageXmlPath);
+                let pkg: Package = PackageReader.Load(packageXmlPath);
                 this.AddPackage(pkg);
             }
         }
@@ -86,6 +89,7 @@ export default class FairyManager
     {
         for(let pkg of this.packageList)
         {
+            console.log(`package length = ${pkg.ComponentList.length}`)
             for(let component of pkg.ComponentList)
             {
                 let path = pkg.rootPath + component.path + component.name;
@@ -105,7 +109,7 @@ export default class FairyManager
                     node.resourceComponent = this.GetRescoureComponent(node);
                     if(node.resourceComponent == null)
                     {
-                        console.warn(`没有找到 resourceComponent packagename= ${node.parent.package.name} comname= ${node.parent.name} nodename=${node.name}`);
+                        console.warn(`没有找到 resourceComponent  packagename= ${node.parent.package.name} comname= ${node.parent.name} nodename=${node.name}`);
                     }
                     else
                     {
@@ -174,9 +178,8 @@ export default class FairyManager
             {
                 if(component.isIgnore)
                     continue;
-
-                // let export: TsExportComponent = new TsExportComponent() {com = component};
-                // export.Export();
+                let ept: TsExportComponent = new TsExportComponent(component);
+                ept.Export();
             }
         }
     }

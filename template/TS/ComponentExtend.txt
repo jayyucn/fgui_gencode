@@ -1,0 +1,11 @@
+/////////////////////////////////////
+// ihaiu.ExportFairyGUICode生成
+// http://blog.ihaiu.com
+/////////////////////////////////////
+
+namespace >:namespace:<
+{
+	export class >:classNameExtend:< extends >:classNameStruct:<
+	{
+	}
+}

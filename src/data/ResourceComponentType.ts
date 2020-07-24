@@ -9,10 +9,10 @@ export default class ResourceComponentTypeHelper
 
 export enum ResourceComponentType
 {
-    component,
-    image,
-    movieclip,
-    swf,
-    font,
-    sound,
+    component = "component",
+    image = "image",
+    movieclip = "movieclip",
+    swf = "swf",
+    font = "font",
+    sound = "sound",
 }

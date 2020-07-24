@@ -87,9 +87,9 @@ export default class ResourceComponent
     private _className: string;
     public get className(): string
     {
-        if(this._className)
+        if(!this._className)
         {
-            let clsName = FS.GetFileNameWithoutExtension(name);
+            let clsName = FS.GetFileNameWithoutExtension(this.name);
             if(!Setting.Options.codeIgnorIllegalClassName)
                 clsName = clsName.replace(/[^A-Za-z0-9_]/,"")
             this._className = StringUtils.FirstUpper(clsName);

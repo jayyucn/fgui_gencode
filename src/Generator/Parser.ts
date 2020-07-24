@@ -23,7 +23,8 @@ export default class Parser
     };
 
     static ParseXml(xmlString: string): XmlDocument {
-            let file: XmlDocument = XmlParser2.parse(xmlString,Parser.options)
+            let file: XmlDocument = XmlParser2.parse(xmlString,Parser.options);
+            // console.log('parseXml-> file = ', file)
             return file;
     }
 

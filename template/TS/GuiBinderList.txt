@@ -1,0 +1,11 @@
+/////////////////////////////////////
+// ihaiu.ExportFairyGUICode生成
+// http://blog.ihaiu.com
+/////////////////////////////////////
+
+function fguiBinderAll()
+{
+	>:FOREACH packlist:<
+	>:[0]:<
+	>:ENDFOREACH:<
+}
