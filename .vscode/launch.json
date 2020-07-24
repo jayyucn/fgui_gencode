@@ -14,7 +14,8 @@
             "program": "${workspaceFolder}\\bin\\Main.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
-            ]
+            ],
+            
         }
     ]
 }

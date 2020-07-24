@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tsc": "tsc && npm run runjs",
+    "tsc": "tsc",
+    "run": "tsc && npm run runjs",
     "runjs": "node ./bin/Main.js"
   },
   "author": "",

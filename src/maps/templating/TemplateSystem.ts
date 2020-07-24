@@ -53,15 +53,15 @@ export class TemplateSystem
         let parsed: boolean = false;
         let skipLine: boolean = false;
         let foundState: State = State.None;
-        let sb: string//: StringBuilder;
+        let line: string = "";
         for(let i = 0;i < lines.length;i++)
         {
+            line = lines[i];
             parsed = false;
             skipLine = false;
-            sb = lines[i];
             while(true)
             {
-                let current = sb;
+                let current = line;
                 let parseStart = current.indexOf(">:",offset);
                 if(parseStart < 0)
                     break;
@@ -71,9 +71,9 @@ export class TemplateSystem
                 if(parseEnd < 0)
                     console.error("There was a parse start but no end on line " + (i + 1));
 
-                let contents = current.substring(parseStart,parseEnd - parseStart);
+                let contents = current.substring(parseStart,parseEnd);
 
-                sb = sb.slice(parseStart - 2,parseEnd - parseStart + 4);
+                line = line.slice(parseStart - 2,parseEnd - parseStart + 4);
 
                 if(this.CheckState(contents,foundState))
                 {
@@ -106,15 +106,15 @@ export class TemplateSystem
 
                 if(!this.emptyArray)
                 {
-                    let tmp = sb.split('');
+                    let tmp = line.split('');
                     tmp.splice(parseStart - 2,0,this.ParseLine(contents));
-                    sb = tmp.join('');
+                    line = tmp.join('');
                 }
 
                 parsed = true;
             }
 
-            let built = sb;
+            let built = line;
 
             if(parsed && built.trim().length == 0)
                 lines.splice(i--,1);
@@ -157,7 +157,7 @@ export class TemplateSystem
 
             this.iteratee = this.replaces[iterateeName];
 
-            if(this.iteratee.length == 0)
+            if(this.iteratee &&this.iteratee.length == 0)
                 this.emptyArray = true;
 
             this.currentIterateeIndex = 0;
@@ -223,6 +223,8 @@ export class TemplateSystem
 
     private FormatReturn(data): string
     {
-        return data.ToString();
+        if(!data)
+            return "";
+        return data.toString();
     }
 }
