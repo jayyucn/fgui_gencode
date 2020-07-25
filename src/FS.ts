@@ -98,7 +98,7 @@ export default class FS
 
     public static IsDirectory(path: string) {
         let stat = statSync(path);
-        return stat.isDirectory();
+        return stat && stat.isDirectory();
     }
 
     public static CheckPath( path:string, isFile = true)

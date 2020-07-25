@@ -63,43 +63,43 @@ export module fgui {
     export class CommonName
     {
         // 对象
-        public static readonly GObject: string = "fairygui.GObject";
+        public static readonly GObject: string = "fgui.GObject";
         // 组件
-        public static readonly GComponent: string = "fairygui.GComponent";
+        public static readonly GComponent: string = "fgui.GComponent";
         // 控制器
-        public static readonly Controller: string = "fairygui.Controller";
+        public static readonly Controller: string = "fgui.Controller";
         // 动效
-        public static readonly Transition: string = "fairygui.Transition";
+        public static readonly Transition: string = "fgui.Transition";
         // 图片
-        public static readonly GImage: string = "fairygui.GImage";
+        public static readonly GImage: string = "fgui.GImage";
         // 文本
-        public static readonly GTextField: string = "fairygui.GTextField";
+        public static readonly GTextField: string = "fgui.GTextField";
         // 文本输入
-        public static readonly GTextInput: string = "fairygui.GTextInput";
+        public static readonly GTextInput: string = "fgui.GTextInput";
         // 富文本
-        public static readonly GRichTextField: string = "fairygui.GRichTextField";
+        public static readonly GRichTextField: string = "fgui.GRichTextField";
         // 图形
-        public static readonly GGraph: string = "fairygui.GGraph";
+        public static readonly GGraph: string = "fgui.GGraph";
         // 组
-        public static readonly GGroup: string = "fairygui.GGroup";
+        public static readonly GGroup: string = "fgui.GGroup";
         // 装载器
-        public static readonly GLoader: string = "fairygui.GLoader";
+        public static readonly GLoader: string = "fgui.GLoader";
         // 列表
-        public static readonly GList: string = "fairygui.GList";
+        public static readonly GList: string = "fgui.GList";
         // 序列帧动画
-        public static readonly GMovieClip: string = "fairygui.GMovieClip";
+        public static readonly GMovieClip: string = "fgui.GMovieClip";
         // 按钮
-        public static readonly GButton: string = "fairygui.GButton";
+        public static readonly GButton: string = "fgui.GButton";
         // 下拉框
-        public static readonly GComboBox: string = "fairygui.GComboBox";
+        public static readonly GComboBox: string = "fgui.GComboBox";
         // 标签
-        public static readonly GLabel: string = "fairygui.GLabel";
+        public static readonly GLabel: string = "fgui.GLabel";
         // 进度条
-        public static readonly GProgressBar: string = "fairygui.GProgressBar";
+        public static readonly GProgressBar: string = "fgui.GProgressBar";
         // 滚动条
-        public static readonly GScrollBar: string = "fairygui.GScrollBar";
+        public static readonly GScrollBar: string = "fgui.GScrollBar";
         // 滑动条
-        public static readonly GSlider: string = "fairygui.GSlider";
+        public static readonly GSlider: string = "fgui.GSlider";
     }
 
     export class ButtonType

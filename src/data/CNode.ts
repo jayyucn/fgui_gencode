@@ -32,6 +32,8 @@ export default class CNode {
     static IgnoreRegex: RegExp = new RegExp(/^n[0-9]+$/);
 
     public get isIgnore(): boolean {
+        if(!this.name)
+            return true;
         if(Setting.Options.codeIgnoreNoname) {
             if(this.name.startsWith('_')) 
                 return true;

@@ -32,46 +32,50 @@ export default class TsExportComponent
     private ExportStruct()
     {
         let com = this.com;
-        let fields: any[][] = [];
-        let setControllerList: any[][] = [];
-        let setTransitionList: any[][] = [];
-        let setDisplayList: any[][] = [];
+        let fields: any[] = [];
+        let setControllerList: any[] = [];
+        let setTransitionList: any[] = [];
+        let setDisplayList: any[] = [];
 
         // fields
         for(let node of this.com.controllerList)
         {
             if(node.isIgnore)
                 continue;
-            let lines = [{fieldName: node.fieldName,type: node.type}] ;
-            fields.push(lines);
-            setControllerList.push(lines);
+            let line = [node.fieldName,node.type];
+            fields.push(line);
+            let lineCtrl = [node.fieldName, node.name];
+            setControllerList.push(lineCtrl);
         }
 
         for (let node of this.com.transitionList)
         {
             if (node.isIgnore)
                 continue;
-            let lines = [{fieldName: node.fieldName,type: node.type}];
-            fields.push(lines);
-            setTransitionList.push(lines);
+            let line = [node.fieldName, node.type];
+            fields.push(line);
+            let lineTrans = [node.fieldName, node.name];
+            setTransitionList.push(lineTrans);
         }
 
         for(let node of this.com.displayList)
         {
             if(node.isIgnore)
                 continue;
-            let lines = [{fieldName: node.fieldName,name: node.name,type: node.type}];
+            let lines = [node.fieldName,node.type];
+            let lineDis = [node.fieldName,node.name,node.type];
             fields.push(lines);
-            setDisplayList.push(lines);
+            setDisplayList.push(lineDis);
         }
 
         for(let node of this.com.componentList)
         {
             if(node.isIgnore)
                 continue;
-            let lines = [{fieldName: node.fieldName, name: node.name,type: node.GetType(this.com)}];
+            let lines = [node.fieldName,node.GetType(this.com)];
+            let lines2 = [node.fieldName,node.name,node.GetType(this.com)];
             fields.push(lines);
-            setDisplayList.push(lines);
+            setDisplayList.push(lines2);
         }
 
 
@@ -95,7 +99,6 @@ export default class TsExportComponent
         template.AddVariable("comname", FS.GetFileNameWithoutExtension(com.name));
         template.AddVariable("URL", com.URL);
         template.AddVariable("fields", fields);
-        console.log("fields = ",fields);
         template.AddVariable("setControllerList", setControllerList);
         template.AddVariable("setDisplayList", setDisplayList);
         template.AddVariable("setTransitionList", setTransitionList);
@@ -133,7 +136,6 @@ export default class TsExportComponent
             {
                 if(args[i] != undefined)
                 {
-                    //var reg = new RegExp("({[" + i + "]})", "g");//这个在索引大于9时会有问题，谢谢何以笙箫的指出
                     var reg = new RegExp("({)" + i + "(})","g");
                     result = result.replace(reg,args[i]);
                 }

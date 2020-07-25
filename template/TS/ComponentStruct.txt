@@ -12,21 +12,12 @@ export default class >:classNameStruct:< extends >:classNameFGUI:<
 	>:FOREACH fields:<
 	public >:[0]:< : >:[1]:<;
 	>:ENDFOREACH:<
-	
 	public static URL:string = ">:URL:<";
 	
 	public static DependPackages:string[] = [>:dependPackages:<];
-
 	
 	public static createInstance():>:classNameExtend:< {
 		return <>:classNameExtend:<><any>(fgui.UIPackage.createObject(">:packagename:<",">:comname:<"));
-	}
-
-	
-
-	public constructor() 
-	{
-		super();
 	}
 
 	protected constructFromXML(xml: any): void 
@@ -36,13 +27,9 @@ export default class >:classNameStruct:< extends >:classNameFGUI:<
 		>:FOREACH setControllerList:<
 		this.>:[0]:< = this.getController(">:[1]:<");
 		>:ENDFOREACH:<
-
-		
 		>:FOREACH setDisplayList:<
 		this.>:[0]:< = <>:[2]:<><any>(this.getChild(">:[1]:<"));
 		>:ENDFOREACH:<
-		
-		
 		>:FOREACH setTransitionList:<
 		this.>:[0]:< =  this.getTransition(">:[1]:<");
 		>:ENDFOREACH:<

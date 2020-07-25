@@ -21,13 +21,13 @@ export default class ComponentReader
         let keys = Object.keys(component);
         for(let key of keys)
         {
-            let nodeList = component[key] instanceof Array ? component[key] : [component[key]];
+            let nodeList: CNode[] = component[key] instanceof Array ? component[key] : [component[key]];
             for (let node of nodeList) {
                 switch(key)
                 {
                     // 控制器
                     case fgui.NodeName.controller:
-                        resourceComponent.transitionList.push(new CNode({
+                        resourceComponent.controllerList.push(new CNode({
                             name:node.name,
                             type:fgui.CommonName.Controller
                         }));
@@ -64,6 +64,7 @@ export default class ComponentReader
                     console.log('ssssss', node)
                 }
                 let isComponent: boolean = false;
+                node.name
                 switch(key)
                 {
                     // 图片
@@ -127,7 +128,7 @@ export default class ComponentReader
                 {
                     resourceComponent.displayList.push(new CNode({
                         name: nodeName,
-                        type: fgui.CommonName.GImage,pkg,src
+                        type: type,pkg,src
                     }));
                 }
             }

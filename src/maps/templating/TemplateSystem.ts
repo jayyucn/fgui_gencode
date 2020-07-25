@@ -26,34 +26,34 @@ enum State
 export class TemplateSystem
 {
     private targetTemplate: string = "";
-    private replaces: Map<string,string> = new Map<string,string>();
+    private replaces: Map<string,string|string[]> = new Map<string,string|string[]>();
 
     private state: State = State.None;
     private iteratee: any;
     private currentIterateeIndex = 0;
     private loopStart = -1;
     private emptyArray = false;
+    private foundState: State = State.None;
 
     constructor(text: string)
     {
         this.targetTemplate = text;
     }
 
-    public AddVariable(key: string,val: any)
+    public AddVariable(key: string,val: string | string[])
     {
         this.replaces.set(key,val);
     }
 
     public Parse(): string
     {
-        // console.log('-------sss-----', this.replaces)
         let lines: string[] = this.targetTemplate.replace("\r\n","\n").split('\n');
 
         let finalLines: string[] = [];
         let offset = 0;
         let parsed: boolean = false;
         let skipLine: boolean = false;
-        let foundState: State = State.None;
+        this.foundState = State.None;
         let parseStr: string = "";
         for(let i = 0;i < lines.length;i++)
         {
@@ -76,12 +76,12 @@ export class TemplateSystem
                 let tmp = parseStr.split('');
                 tmp.splice(parseStart - 2,parseEnd - parseStart + 4);
                 parseStr = tmp.join('');
-                if(this.CheckState(contents,foundState))
+                if(this.CheckState(contents))
                 {
                     skipLine = true;
 
                     // If we have left the loop
-                    if(foundState == State.None)
+                    if(this.foundState == State.None)
                     {
                         if(this.loopStart == -1)
                             continue;
@@ -99,7 +99,7 @@ export class TemplateSystem
                             break;
                         }
                     }
-                    else if(foundState == State.ForEach || foundState == State.ForEvery)
+                    else if(this.foundState == State.ForEach || this.foundState == State.ForEvery)
                         this.loopStart = i + 1;
 
                     continue;
@@ -130,14 +130,14 @@ export class TemplateSystem
         return finalLines.join('\n');
     }
 
-    private CheckState(contents: string,foundState: State): boolean
+    private CheckState(contents: string): boolean
     {
         if(contents.startsWith("ENDFOREACH"))
         {
             if((this.state & State.ForEach) == 0)
                 console.error("A foreach has ended before the start of the loop");
 
-            foundState = State.None;
+            this.foundState = State.None;
             return true;
         }
         if(contents.startsWith("ENDFOREVERY"))
@@ -145,7 +145,7 @@ export class TemplateSystem
             if((this.state & State.ForEvery) == 0)
                 console.error("A foreach has ended before the start of the loop");
 
-            foundState = State.None;
+            this.foundState = State.None;
             return true;
         }
         else if(contents.startsWith("FOREACH"))
@@ -169,7 +169,7 @@ export class TemplateSystem
                 this.emptyArray = true;
 
             this.currentIterateeIndex = 0;
-            foundState = State.ForEach;
+            this.foundState = State.ForEach;
             return true;
         }
         else if(contents.startsWith("FOREVERY"))
@@ -190,7 +190,7 @@ export class TemplateSystem
                 this.emptyArray = true;
 
             this.currentIterateeIndex = 0;
-            foundState = State.ForEvery;
+            this.foundState = State.ForEvery;
             return true;
         }
 
@@ -211,8 +211,8 @@ export class TemplateSystem
                 let idx = -1;
                 // console.log(`idx = ${idxStr}, contents = ${contents}, this.iteratee = ${this.iteratee}`);
                 
-                // if(!isNaN(Number(idxStr)))
-                return this.iteratee[idxStr]
+                if(!isNaN(Number(idxStr)))
+                    return this.iteratee[this.currentIterateeIndex][idxStr]
                 // else
                 //     throw new Error("The index " + idxStr + " is not an integer");
             }

@@ -25,7 +25,8 @@ export default class Main {
         // Parser.ParseXml(file);
 
         let mgr = new FairyManager();
-        mgr.LoadProject('./bin');
+        // mgr.LoadProject('../../bin');
+        mgr.LoadProject('E:\\workspace\\JJSGDNF\\client\\arts_project\\Game-FGUI');
         mgr.ExportTS();
 
         // let src = "./bin/assets/Component~NCode/GoButton.xml";

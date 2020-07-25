@@ -101,22 +101,22 @@ export default class ResourceComponent
         this._className = name;
     }
 
-    private _structImports: string[];
-    public get structImports(): string[]
+    private _structImports: any[];
+    public get structImports(): any[]
     {
         if(!this._structImports)
         {
-            this._structImports = [this.classNameExtend, `../../Extends/${this.packageName}/${this.classNameExtend}`];
+            this._structImports = [[this.classNameExtend,`../../Extends/${this.packageName}/${this.classNameExtend}`]];
         }
         return this._structImports;
     }
 
-    private _extendsImports: string[];
-    public get extendsImports(): string[]
+    private _extendsImports: any[];
+    public get extendsImports(): any[]
     {
         if(!this._extendsImports)
         {
-            this._extendsImports = [this.classNameExtend, `../../Generates/${this.packageName}/${this.classNameExtend}`];
+            this._extendsImports = [[this.classNameStruct,`../../Generates/${this.packageName}/${this.classNameStruct}`]];
         }
         return this._extendsImports;
     }

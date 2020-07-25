@@ -32,13 +32,13 @@ export default class PackageReader
         }
         else
         {
-            pkg.name = FS.GetFileNameWithoutExtension(FS.GetDirectoryPath(xmlStr));
+            pkg.name = FS.GetFileNameWithoutExtension(FS.GetDirectoryPath(path));
         }
         let resources = packageDescription.resources;
         let keys = Object.keys(resources);
         for(let key of keys)
         {
-            let list = [...resources[key]];
+            let list = resources[key] instanceof Array ? resources[key] : [resources[key]];
             for(let node of list) {
                 let item = new ResourceComponent(node);
                 item.type = <ResourceComponentType>key;

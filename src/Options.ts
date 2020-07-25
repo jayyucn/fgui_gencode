@@ -1,6 +1,6 @@
 export default class Options {
     codeMemberNamePrefix: string = "";
-    codeIgnoreNoname: boolean = false; 
+    codeIgnoreNoname: boolean = true; 
     codeIgnorIllegalClassName: boolean =   false;
     codeIgnorNoExported: boolean = true;
     codeExportDepend: boolean = true;
