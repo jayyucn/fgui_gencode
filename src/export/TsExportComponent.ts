@@ -20,8 +20,6 @@ export default class TsExportComponent
     public Export()
     {
         this.name = this.com.className;
-        // if(this.name != "ServerPanel.xml" && this.name != "LoginWindowUI.xml")
-        //     return
         this.ExportStruct();
         this.ExportExtend();
     }
@@ -36,7 +34,6 @@ export default class TsExportComponent
         let setControllerList: any[] = [];
         let setTransitionList: any[] = [];
         let setDisplayList: any[] = [];
-
         // fields
         for(let node of this.com.controllerList)
         {
@@ -72,12 +69,12 @@ export default class TsExportComponent
         {
             if(node.isIgnore)
                 continue;
-            let lines = [node.fieldName,node.GetType(this.com)];
-            let lines2 = [node.fieldName,node.name,node.GetType(this.com)];
+            let type = node.GetType(this.com);
+            let lines = [node.fieldName, type];
+            let lines2 = [node.fieldName,node.name, type];
             fields.push(lines);
             setDisplayList.push(lines2);
         }
-
 
         let dependPackages = "";
         let dependPackageList: string[] = new Array<string>();
@@ -90,7 +87,7 @@ export default class TsExportComponent
 
 
         let template = new TemplateSystem(FS.ReadTxt(TsPathTemplate.ComponentStruct));
-        template.AddVariable("imports", com.structImports);
+        template.AddVariable("imports", com.extendsImports);
         template.AddVariable("classNameFGUI", com.classNameFGUI);
         template.AddVariable("classNameStruct", com.classNameStruct);
         template.AddVariable("classNameExtend", com.classNameExtend);
@@ -117,7 +114,7 @@ export default class TsExportComponent
     {
         let com = this.com;
         let template: TemplateSystem = new TemplateSystem(FS.ReadTxt(TsPathTemplate.ComponentExtend));
-        template.AddVariable("imports", com.extendsImports);
+        template.AddVariable("imports", com.structImports);
         template.AddVariable("classNameFGUI", com.classNameFGUI);
         template.AddVariable("classNameStruct", com.classNameStruct);
         template.AddVariable("classNameExtend", com.classNameExtend);

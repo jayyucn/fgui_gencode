@@ -1,6 +1,7 @@
 import { readdirSync, statSync, exists, existsSync, readFileSync } from 'fs';
 import * as Fse from 'fs-extra';
 import Config from './Config';
+import ResourceComponent from './data/ResourceComponent';
 
 export default class FS
 {
@@ -123,6 +124,12 @@ export default class FS
                 FS.CreateDirectory(target);
             }
         }
+    }
+
+    public static GetImportParams(res: ResourceComponent, isExtend:boolean = false): string[] {
+        let cls = isExtend?res.classNameExtend:res.classNameStruct;
+        let folder = isExtend ? "Extends" : "Generates";
+        return [cls,`../../${folder}/${res.packageName}/${cls}`];
     }
     
 }

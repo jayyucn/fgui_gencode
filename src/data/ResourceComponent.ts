@@ -106,17 +106,24 @@ export default class ResourceComponent
     {
         if(!this._structImports)
         {
-            this._structImports = [[this.classNameExtend,`../../Extends/${this.packageName}/${this.classNameExtend}`]];
+            this._structImports = [];
+            this._structImports.push(FS.GetImportParams(this));
+            for (const com of this.componentList) {
+                let res = com.resourceComponent;
+                if(res)
+                    this._structImports.push(FS.GetImportParams(this));
+            }
         }
         return this._structImports;
     }
+
 
     private _extendsImports: any[];
     public get extendsImports(): any[]
     {
         if(!this._extendsImports)
         {
-            this._extendsImports = [[this.classNameStruct,`../../Generates/${this.packageName}/${this.classNameStruct}`]];
+            this._extendsImports = [FS.GetImportParams(this, true)];
         }
         return this._extendsImports;
     }

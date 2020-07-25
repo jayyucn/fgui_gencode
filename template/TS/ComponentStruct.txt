@@ -12,6 +12,7 @@ export default class >:classNameStruct:< extends >:classNameFGUI:<
 	>:FOREACH fields:<
 	public >:[0]:< : >:[1]:<;
 	>:ENDFOREACH:<
+
 	public static URL:string = ">:URL:<";
 	
 	public static DependPackages:string[] = [>:dependPackages:<];
@@ -28,7 +29,7 @@ export default class >:classNameStruct:< extends >:classNameFGUI:<
 		this.>:[0]:< = this.getController(">:[1]:<");
 		>:ENDFOREACH:<
 		>:FOREACH setDisplayList:<
-		this.>:[0]:< = <>:[2]:<><any>(this.getChild(">:[1]:<"));
+		this.>:[0]:< = <>:[2]:<>(this.getChild(">:[1]:<"));
 		>:ENDFOREACH:<
 		>:FOREACH setTransitionList:<
 		this.>:[0]:< =  this.getTransition(">:[1]:<");

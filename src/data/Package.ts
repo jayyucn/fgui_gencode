@@ -2,6 +2,7 @@ import StringUtils from "../StringUtils";
 import Setting from "../Setting";
 import ResourceComponent from './ResourceComponent';
 import { ResourceComponentType } from './ResourceComponentType';
+import FS from '../FS';
 
 export default class Package {
     id: string = "";
@@ -37,6 +38,17 @@ export default class Package {
         if(this.resources.has(resId))
             return this.resources.get(resId);
         return null;
+    }
+
+    private _importList: any[];
+    public get importList(): any[] {
+        if(!this._importList) {
+            this._importList = [];
+            for(let com of this.exportComponents) {
+                this._importList.push(FS.GetImportParams(com,true));
+            }
+        }
+        return this._importList;
     }
 
     private _codeFolderName: string;

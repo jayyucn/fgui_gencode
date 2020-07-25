@@ -8,6 +8,8 @@ import TSExportBinder from "../export/TSExportBinder";
 import Setting from "../Setting";
 import TSExportSoundKey from "../export/TSExportSoundKey";
 import TsExportComponent from "../export/TsExportComponent";
+import TSExportGuiPackageNames from "../export/TSExportGuiPackageNames";
+import TSExportGuiBinderList from "../export/TSExportGuiBinderList";
 
 export default class FairyManager
 {
@@ -166,8 +168,8 @@ export default class FairyManager
         this.ExportTSComponent();
         this.ExportTSBinder();
         this.ExportTSExportGuiPackageNames();
-        this.ExportTSExportGuiBinderList();
-        this.ExportTSExportSoundKey();
+        // this.ExportTSExportGuiBinderList();
+        // this.ExportTSExportSoundKey();
     }
 
     private ExportTSComponent()
@@ -197,13 +199,13 @@ export default class FairyManager
     private ExportTSExportGuiPackageNames()
     {
 
-        // TSExportGuiPackageNames.Export(packageList);
+        TSExportGuiPackageNames.Export(this.packageList);
     }
 
     private ExportTSExportGuiBinderList()
     {
 
-        // TSExportGuiBinderList.Export(packageList);
+        TSExportGuiBinderList.Export(this.packageList);
     }
 
     private ExportTSExportSoundKey()

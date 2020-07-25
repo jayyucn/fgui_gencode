@@ -54,11 +54,6 @@ export class ComponentNode extends CNode{
         super(param);
     }
 
-    public name: string = "";
-    public type: string = "";
-
-    public pkg: string = "";
-    public src: string = "";
     
     public parent: ResourceComponent;
     public resourceComponent: ResourceComponent;
@@ -85,7 +80,7 @@ export class ComponentNode extends CNode{
             }
             else
             {
-                return resourceComponent.extendClassName;
+                return resourceComponent.classNameExtend;
             }
         }
     }
