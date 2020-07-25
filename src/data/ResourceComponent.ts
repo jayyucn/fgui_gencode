@@ -106,7 +106,7 @@ export default class ResourceComponent
     {
         if(!this._imports)
         {
-            this._imports = [this.classNameExtend, this.classNameStruct];
+            this._imports = [this.classNameExtend, `../../Extends/${this.packageName}/${this.classNameExtend}`];
         }
         return this._imports;
     }

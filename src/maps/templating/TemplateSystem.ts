@@ -46,7 +46,7 @@ export class TemplateSystem
 
     public Parse(): string
     {
-        console.log('-------sss-----', this.replaces)
+        // console.log('-------sss-----', this.replaces)
         let lines: string[] = this.targetTemplate.replace("\r\n","\n").split('\n');
 
         let finalLines: string[] = [];
@@ -108,8 +108,12 @@ export class TemplateSystem
                 if(!this.emptyArray)
                 {
                     let tmp = parseStr.split('');
-                    tmp.splice(parseStart - 2,0,this.ParseLine(contents));
+                   
+                    let ps = this.ParseLine(contents);
+                    tmp.splice(parseStart - 2,0,ps);
+                    
                     parseStr = tmp.join('');
+                    console.log('--content--', contents," ps= ", ps, " bu = ", parseStr);
                 }
 
                 parsed = true;
@@ -157,11 +161,10 @@ export class TemplateSystem
                 console.error("No variable with the name " + iterateeName + " could be located");
 
             this.iteratee = this.replaces.get(iterateeName);
-
-            if(!(this.iteratee instanceof Array)) {
-                console.log("iteratee = ",this.iteratee, iterateeName);
-                this.iteratee;
+            if(iterateeName == "imports") {
+                // console.log('imports --- ', this.iteratee, iterateeName);
             }
+            
             if(!this.iteratee || this.iteratee.length == 0)
                 this.emptyArray = true;
 
@@ -198,7 +201,7 @@ export class TemplateSystem
     {
         if(contents.startsWith("[") && contents.endsWith("]"))
         {
-            if(contents == "[i]" && this.iteratee != null)
+            if(contents == '[i]' && this.iteratee != null)
                 return this.iteratee[this.currentIterateeIndex];
             else if(contents == "[idx]" && this.iteratee != null)
                 return this.FormatReturn(this.currentIterateeIndex);
@@ -206,10 +209,12 @@ export class TemplateSystem
             {
                 var idxStr = contents.slice(1,contents.length-1);
                 let idx = -1;
-                if(!isNaN(Number(idxStr)))
-                    return this.iteratee[this.currentIterateeIndex][idx]
-                else
-                    throw new Error("The index " + idxStr + " is not an integer");
+                // console.log(`idx = ${idxStr}, contents = ${contents}, this.iteratee = ${this.iteratee}`);
+                
+                // if(!isNaN(Number(idxStr)))
+                return this.iteratee[idxStr]
+                // else
+                //     throw new Error("The index " + idxStr + " is not an integer");
             }
         }
         else if(contents == "ELSEIF")

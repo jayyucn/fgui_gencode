@@ -12,7 +12,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\bin\\Main.js",
+            "program": "${workspaceFolder}/bin/Main.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],
