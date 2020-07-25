@@ -113,7 +113,7 @@ export class TemplateSystem
                     tmp.splice(parseStart - 2,0,ps);
                     
                     parseStr = tmp.join('');
-                    console.log('--content--', contents," ps= ", ps, " bu = ", parseStr);
+                    // console.log('--content--', contents," ps= ", ps, " bu = ", parseStr);
                 }
 
                 parsed = true;
