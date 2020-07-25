@@ -86,7 +86,7 @@ export default class TsExportComponent
 
 
         let template = new TemplateSystem(FS.ReadTxt(TsPathTemplate.ComponentStruct));
-        template.AddVariable("imports", com.imports);
+        template.AddVariable("imports", com.structImports);
         template.AddVariable("classNameFGUI", com.classNameFGUI);
         template.AddVariable("classNameStruct", com.classNameStruct);
         template.AddVariable("classNameExtend", com.classNameExtend);
@@ -95,6 +95,7 @@ export default class TsExportComponent
         template.AddVariable("comname", FS.GetFileNameWithoutExtension(com.name));
         template.AddVariable("URL", com.URL);
         template.AddVariable("fields", fields);
+        console.log("fields = ",fields);
         template.AddVariable("setControllerList", setControllerList);
         template.AddVariable("setDisplayList", setDisplayList);
         template.AddVariable("setTransitionList", setTransitionList);
@@ -113,7 +114,7 @@ export default class TsExportComponent
     {
         let com = this.com;
         let template: TemplateSystem = new TemplateSystem(FS.ReadTxt(TsPathTemplate.ComponentExtend));
-        template.AddVariable("namespace", com.nameSpace);
+        template.AddVariable("imports", com.extendsImports);
         template.AddVariable("classNameFGUI", com.classNameFGUI);
         template.AddVariable("classNameStruct", com.classNameStruct);
         template.AddVariable("classNameExtend", com.classNameExtend);
