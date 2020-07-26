@@ -168,8 +168,8 @@ export default class FairyManager
         this.ExportTSComponent();
         this.ExportTSBinder();
         this.ExportTSExportGuiPackageNames();
-        // this.ExportTSExportGuiBinderList();
-        // this.ExportTSExportSoundKey();
+        this.ExportTSExportGuiBinderList();
+        this.ExportTSExportSoundKey();
     }
 
     private ExportTSComponent()

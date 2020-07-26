@@ -9,15 +9,22 @@ export default class TSExportGuiBinderList
     public static Export(packageList: Package[])
     {
         let list = [];
+        let importList = [];
 
         for(let pkg of packageList)
         {
             if(!pkg.genCode)
                 continue;
-            list.push([`${pkg.nameSpace}.${pkg.classNameBinder}.bindAll()`]);
+            let inpt = [pkg.classNameBinder, `./${pkg.codeFolderName}/${pkg.classNameBinder}`];
+            importList.push(inpt);
+            if(!pkg.genCode)
+                continue;
+            list.push([`${pkg.classNameBinder}.bindAll()`]);
         }
+        
 
         let template: TemplateSystem = new TemplateSystem(FS.ReadTxt(TsPathTemplate.GuiBinderList));
+        template.AddVariable("imports",importList);
         template.AddVariable("packlist",list);
         let content = template.Parse();
         let path = TsPathOut.GuiBinderList;

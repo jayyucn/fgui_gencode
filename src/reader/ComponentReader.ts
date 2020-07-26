@@ -63,7 +63,7 @@ export default class ComponentReader
                 {
                     console.log('ssssss', node)
                 }
-                let isComponent: boolean = false;
+                let isIgnore: boolean = false;
                 node.name
                 switch(key)
                 {
@@ -96,6 +96,8 @@ export default class ComponentReader
                         node.advanced && (advanced = node.advanced == "true");
                         if(advanced)
                             type = fgui.CommonName.GGroup;
+                        else
+                            isIgnore = true;
                         break;
                     // 装载器
                     case fgui.NodeName.loader:
@@ -111,7 +113,7 @@ export default class ComponentReader
                         break;
                     // 自定义组件
                     case fgui.NodeName.component:
-                        isComponent = true;
+                        isIgnore = true;
                         node.pkg && (pkg = node.pkg);
                         node.src && (src = node.src);
                         type = fgui.CommonName.GComponent;
@@ -124,7 +126,7 @@ export default class ComponentReader
                         }));
                         break;
                 }
-                if(!isComponent)
+                if(!isIgnore)
                 {
                     resourceComponent.displayList.push(new CNode({
                         name: nodeName,

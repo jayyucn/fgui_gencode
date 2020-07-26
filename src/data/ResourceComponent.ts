@@ -32,7 +32,10 @@ export default class ResourceComponent
 
     public AddDependPackage(pkg: Package)
     {
-        this.dependPackageList.indexOf(pkg) != -1 && (this.dependPackageList.push(pkg));
+        if(this.dependPackageList.length == 0)
+            this.dependPackageList.push(this.package);
+        if(this.dependPackageList.findIndex(function(v){return v.id == pkg.id}) == -1)
+            this.dependPackageList.push(pkg);
     }
 
     public AddNode(node: ComponentNode)
