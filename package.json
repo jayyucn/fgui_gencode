@@ -1,14 +1,15 @@
 {
-  "name": "fguigencode",
+  "name": "fgui_gen",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
     "tsc": "tsc",
     "run": "tsc && npm run runjs",
     "runjs": "node ./bin/index.js"
   },
-  "author": "",
+  "author": "nalanrola",
   "license": "ISC",
   "dependencies": {
     "fs-extra": "^9.0.1",
