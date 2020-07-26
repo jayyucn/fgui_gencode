@@ -1,7 +1,7 @@
 import { readdirSync, statSync, exists, existsSync, readFileSync } from 'fs';
 import * as Fse from 'fs-extra';
-import Config from './Config';
 import ResourceComponent from './data/ResourceComponent';
+import Setting from './Setting';
 
 export default class FS
 {
@@ -31,21 +31,14 @@ export default class FS
             let stat = statSync(itemPath);
             if(stat.isDirectory())
             {
-                if(!item.startsWith(Config.IGNORE_PATH_PREFIX))
+                if(!item.startsWith(Setting.Options.ignorePathPrefix))
                 {
                     let newList = FS.ReaddirSync(itemPath,includeFileTypes,excludeFileTypes);
                     list = list.concat(newList);
                 }
-            } else if(stat.isFile())
+            } else if(stat.isFile() && item.endsWith('.xml'))
             {
-                for(let type of Config.INCLUDE_FILE_TYPES)
-                {
-                    if(item.endsWith('.' + type))
-                    {
-                        list.push(itemPath);
-                        break;
-                    }
-                }
+                list.push(itemPath);
             }
         }
         return list;
@@ -58,7 +51,7 @@ export default class FS
         {
             let itemPath = assetPath + '/' + packageName;
             let stat = statSync(itemPath);
-            if(stat.isDirectory() && !packageName.startsWith(Config.IGNORE_PATH_PREFIX))
+            if(stat.isDirectory() && !packageName.startsWith(Setting.Options.ignorePathPrefix))
             {
                 list.push(itemPath);
             }
@@ -85,6 +78,7 @@ export default class FS
     }
 
     public static GetFileNameWithoutExtension(name: string): string {
+        name = name.slice(name.lastIndexOf('/')+1);
         return name.split('.')[0]
     }
 

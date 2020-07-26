@@ -1,6 +1,6 @@
 import Package from "../data/Package";
 import FS from "../FS";
-import {TemplateSystem} from "../maps/templating/TemplateSystem";
+import {TemplateSystem} from "../TemplateSystem";
 import TsPathOut from "./TsPathOut";
 import TsPathTemplate from "./TsPathTemplate";
 

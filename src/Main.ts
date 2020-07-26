@@ -1,13 +1,9 @@
-import FS from './FS';
-import Config from './Config';
-import CodeGenerator from './Generator/CodeGenerator';
-import PackageInfoMgr from './Generator/PackageInfoMgr';
-import Parser from './Generator/Parser';
-import {readFileSync} from 'fs';
+import OS from 'os';
 import FairyManager from './reader/FairyManager';
 
 export default class Main {
     constructor() {
+
         this.Init();
     }
 
@@ -25,8 +21,11 @@ export default class Main {
         // Parser.ParseXml(file);
 
         let mgr = new FairyManager();
-        // mgr.LoadProject('../../bin');
-        mgr.LoadProject('E:\\workspace\\JJSGDNF\\client\\arts_project\\Game-FGUI');
+        if (OS.platform() == "darwin") {
+            mgr.LoadProject('/Users/jay/projects/client/arts_project/Game-FGUI');
+            // mgr.LoadProject('./bin/');
+        } else
+            mgr.LoadProject('E:\\workspace\\JJSGDNF\\client\\arts_project\\Game-FGUI');
         mgr.ExportTS();
 
         // let src = "./bin/assets/Component~NCode/GoButton.xml";
@@ -34,7 +33,7 @@ export default class Main {
         // console.log(exist)
     }
 
-    
+
 }
 
 new Main();

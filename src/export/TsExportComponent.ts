@@ -3,7 +3,7 @@ import CNode from '../data/CNode';
 import TsPathTemplate from "./TsPathTemplate";
 import FS from "../FS";
 import TsPathOut from "./TsPathOut";
-import {TemplateSystem} from "../maps/templating/TemplateSystem";
+import {TemplateSystem} from "../TemplateSystem";
 export interface ILines {
 
 }
@@ -79,9 +79,9 @@ export default class TsExportComponent
         let dependPackages = "";
         let dependPackageList: string[] = new Array<string>();
 
-        for (let item of this.com.dependPackageList)
+        for (let pkg of this.com.dependPackageList)
         {
-            dependPackageList.push(`\"${item.name}\"`);
+            dependPackageList.push(`\"${pkg.name}\"`);
         }
         dependPackages = dependPackageList.toString();
 
@@ -102,7 +102,7 @@ export default class TsExportComponent
         let content = template.Parse();
         let structPath = TsPathOut.ComponentStruct;
         let folderName = com.package.codeFolderName;
-        let path = this.Format(structPath,[folderName,this.name]);
+        let path = structPath.format(folderName,this.name);
         FS.CheckPath(path);
         FS.WriteTxt(path, content);
     }
@@ -119,25 +119,10 @@ export default class TsExportComponent
         template.AddVariable("classNameStruct", com.classNameStruct);
         template.AddVariable("classNameExtend", com.classNameExtend);
         let content = template.Parse();
-        let path = this.Format(TsPathOut.ComponentExtend,[com.package.codeFolderName,this.name]);
+        let path = TsPathOut.ComponentExtend.format(com.package.codeFolderName,this.name);
 
         FS.CheckPath(path);
         FS.WriteTxt(path, content);
     }
 
-    private Format(target:string, args: any[]) {
-        var result = target;
-        if(args.length > 0)
-        {
-            for(var i = 0;i < args.length;i++)
-            {
-                if(args[i] != undefined)
-                {
-                    var reg = new RegExp("({)" + i + "(})","g");
-                    result = result.replace(reg,args[i]);
-                }
-            }
-        }
-        return result;
-    }
 }

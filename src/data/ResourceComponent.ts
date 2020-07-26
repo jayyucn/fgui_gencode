@@ -108,11 +108,7 @@ export default class ResourceComponent
         {
             this._structImports = [];
             this._structImports.push(FS.GetImportParams(this));
-            for (const com of this.componentList) {
-                let res = com.resourceComponent;
-                if(res)
-                    this._structImports.push(FS.GetImportParams(this));
-            }
+            
         }
         return this._structImports;
     }
@@ -124,6 +120,15 @@ export default class ResourceComponent
         if(!this._extendsImports)
         {
             this._extendsImports = [FS.GetImportParams(this, true)];
+            let clsName = [];
+            for (const com of this.componentList) {
+                let res = com.resourceComponent;
+                if(res && clsName.indexOf(res.classNameExtend) == -1)
+                {
+                    this._extendsImports.push(FS.GetImportParams(res,true));
+                    clsName.push(res.classNameExtend);
+                }
+            }
         }
         return this._extendsImports;
     }

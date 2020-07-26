@@ -10,4 +10,6 @@ export default class Options {
     soundPackageName: string = "Sound";
 
     templateDir: string = "./template";
+
+    ignorePathPrefix: string = "_";
 }

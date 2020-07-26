@@ -1,5 +1,5 @@
 import ResourceComponent from "../data/ResourceComponent";
-import Parser from "../Generator/Parser";
+import Parser from "../parse/Parser";
 import {fgui} from "../data/FguiComponentType";
 import CNode, { ComponentNode } from '../data/CNode';
 import FS from '../FS';

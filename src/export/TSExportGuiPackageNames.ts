@@ -1,5 +1,5 @@
 import Package from "../data/Package";
-import {TemplateSystem} from "../maps/templating/TemplateSystem";
+import {TemplateSystem} from "../TemplateSystem";
 import TsPathTemplate from "./TsPathTemplate";
 import FS from "../FS";
 import TsPathOut from "./TsPathOut";

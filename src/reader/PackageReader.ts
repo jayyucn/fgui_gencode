@@ -1,7 +1,7 @@
 import Package from '../data/Package';
 import FS from '../FS';
-import Parser from '../Generator/Parser';
-import { INode } from '../Generator/XmlFile';
+import Parser from '../parse/Parser';
+import { INode } from '../parse/XmlFile';
 import ResourceComponent from '../data/ResourceComponent';
 import {ResourceComponentType} from '../data/ResourceComponentType';
 
@@ -26,14 +26,11 @@ export default class PackageReader
         if(publish)
         {
             pkg.name = publish.name;
-
             if(publish.genCode)
                 pkg.genCode = publish.genCode == "true";
         }
-        else
-        {
+        if(!pkg.name)
             pkg.name = FS.GetFileNameWithoutExtension(FS.GetDirectoryPath(path));
-        }
         let resources = packageDescription.resources;
         let keys = Object.keys(resources);
         for(let key of keys)

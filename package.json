@@ -6,7 +6,7 @@
   "scripts": {
     "tsc": "tsc",
     "run": "tsc && npm run runjs",
-    "runjs": "node ./bin/Main.js"
+    "runjs": "node ./bin/index.js"
   },
   "author": "",
   "license": "ISC",
