@@ -1,7 +1,7 @@
 {
   "name": "fgui_gen",
   "version": "1.0.0",
-  "description": "",
+  "description": "fgui生成ts代码",
   "main": "index.js",
   "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
