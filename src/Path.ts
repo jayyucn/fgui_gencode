@@ -59,6 +59,18 @@ export default class Path
         return list;
     }
 
+    public static GetFGUIResList(resPath: string): string[]{
+        let list: string[] = [];
+        let itemList = readdirSync(resPath);
+        for(let item of itemList) {
+            let itemPath = resPath + '/' + item;
+            let stat = statSync(itemPath);
+            if(stat && stat.isFile())
+                list.push(itemPath);
+        }
+        return list;
+    }
+
     public static Exists(path: string) {
         return existsSync(path);
     }

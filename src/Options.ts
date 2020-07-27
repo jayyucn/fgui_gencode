@@ -12,4 +12,6 @@ export default class Options {
     templateDir: string = "./template";
 
     ignorePathPrefix: string = "_";
+
+    fguiFileExtension: string = "bin";
 }

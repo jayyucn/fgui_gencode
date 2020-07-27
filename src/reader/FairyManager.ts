@@ -169,7 +169,19 @@ export default class FairyManager
     }
 
     public ExportRes(resPath: string) {
-        let dirs: string[] = Path.GetDirectories(root);
+        let resList: string[] = Path.GetFGUIResList(resPath);
+        let resMap: Map<string, string[]> = new Map<string, string[]>();
+        let pkgList = [];
+        for (let index = 0; index < resList.length; index++) {
+            let res = resList[index];
+            if(res.endsWith('.'+Setting.Options.fguiFileExtension)) {
+                if(pkgList.indexOf(res) == -1) {
+                    pkgList.push(res);
+                    resList.splice(index,1);
+                }
+            }
+        }
+       
 
     }
 
