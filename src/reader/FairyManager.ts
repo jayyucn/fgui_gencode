@@ -1,5 +1,5 @@
 import Package from "../data/Package";
-import CNode,{ComponentNode} from "../data/CNode";
+import XmlNode,{ComponentNode} from "../data/XmlNode";
 import FS from "../FS";
 import PackageReader from "./PackageReader";
 import ComponentReader from "./ComponentReader";
@@ -87,11 +87,11 @@ export default class FairyManager
         this.SetComponentNode();
     }
 
+
     private LoadComponent()
     {
         for(let pkg of this.packageList)
         {
-            console.log(`package length = ${pkg.ComponentList.length}`)
             for(let component of pkg.ComponentList)
             {
                 let path = pkg.rootPath + component.path + component.name;
@@ -106,7 +106,7 @@ export default class FairyManager
         {
             for(let component of pkg.ComponentList)
             {
-                for(let node of component.componentList)
+                for(let node of component.componentNodeList)
                 {
                     node.resourceComponent = this.GetRescoureComponent(node);
                     if(node.resourceComponent == null)
@@ -119,7 +119,7 @@ export default class FairyManager
                         node.resourceComponent.beDependList.push(component);
                         if(component.exported)
                         {
-                            node.resourceComponent.hasBeDependForExtported = true;
+                            node.resourceComponent.beenDependentorExtported = true;
                         }
                     }
                 }
@@ -139,20 +139,16 @@ export default class FairyManager
                     {
                         let pkg = this.GetPackage(node.pkg);
                         if(pkg != null)
-                        {
                             component.AddDependPackage(pkg);
-                        }
                     }
                 }
             }
         }
-
     }
 
     public TraverseDependPackage(component: ResourceComponent,root: ResourceComponent)
     {
-
-        for(let node of component.componentList)
+        for(let node of component.componentNodeList)
         {
             if(node.resourceComponent != null)
             {

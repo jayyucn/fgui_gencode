@@ -18,7 +18,7 @@ export default class >:classNameStruct:< extends >:classNameFGUI:<
 	public static DependPackages:string[] = [>:dependPackages:<];
 	
 	public static createInstance():>:classNameExtend:< {
-		return <>:classNameExtend:<><any>(fgui.UIPackage.createObject(">:packagename:<",">:comname:<"));
+		return <>:classNameExtend:<>fgui.UIPackage.createObject(">:packagename:<",">:comname:<");
 	}
 
 	protected constructFromXML(xml: any): void 

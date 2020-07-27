@@ -2,7 +2,7 @@ import Setting from "../Setting";
 import ResourceComponent from "./ResourceComponent";
 import {fgui} from "./FguiComponentType";
 
-export default class CNode {
+export default class XmlNode {
 
     constructor(param: {
         name: string,
@@ -37,13 +37,13 @@ export default class CNode {
         if(Setting.Options.codeIgnoreNoname) {
             if(this.name.startsWith('_')) 
                 return true;
-            return CNode.IgnoreRegex.test(this.name);
+            return XmlNode.IgnoreRegex.test(this.name);
         }
         return false;
     }
 }
 
-export class ComponentNode extends CNode{
+export class ComponentNode extends XmlNode{
 
     constructor(param:{
         name: string,

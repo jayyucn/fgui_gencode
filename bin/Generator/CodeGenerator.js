@@ -1,8 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class CodeGenerator {
-    static Launch(packagesPaths) {
-    }
-}
-exports.default = CodeGenerator;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29kZUdlbmVyYXRvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9HZW5lcmF0b3IvQ29kZUdlbmVyYXRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLE1BQXFCLGFBQWE7SUFDdkIsTUFBTSxDQUFDLE1BQU0sQ0FBQyxhQUF1QjtJQUc1QyxDQUFDO0NBQ0o7QUFMRCxnQ0FLQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IGNsYXNzIENvZGVHZW5lcmF0b3Ige1xyXG4gICAgcHVibGljIHN0YXRpYyBMYXVuY2gocGFja2FnZXNQYXRoczogc3RyaW5nW10pXHJcbiAgICB7XHJcblxyXG4gICAgfVxyXG59Il19

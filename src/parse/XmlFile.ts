@@ -36,7 +36,7 @@ export interface IComponent {
     displayList: IDisplayList
 }
 
-export interface ICNode {
+export interface IXmlNode {
 
 }
 

@@ -1,7 +1,7 @@
 import ResourceComponent from "../data/ResourceComponent";
 import Parser from "../parse/Parser";
 import {fgui} from "../data/FguiComponentType";
-import CNode, { ComponentNode } from '../data/CNode';
+import XmlNode, { ComponentNode } from '../data/XmlNode';
 import FS from '../FS';
 
 export default class ComponentReader
@@ -21,20 +21,20 @@ export default class ComponentReader
         let keys = Object.keys(component);
         for(let key of keys)
         {
-            let nodeList: CNode[] = component[key] instanceof Array ? component[key] : [component[key]];
+            let nodeList: XmlNode[] = component[key] instanceof Array ? component[key] : [component[key]];
             for (let node of nodeList) {
                 switch(key)
                 {
                     // 控制器
                     case fgui.NodeName.controller:
-                        resourceComponent.controllerList.push(new CNode({
+                        resourceComponent.controllerList.push(new XmlNode({
                             name:node.name,
                             type:fgui.CommonName.Controller
                         }));
                         break;
                     // 动效
                     case fgui.NodeName.transition:
-                        resourceComponent.transitionList.push(new CNode({
+                        resourceComponent.transitionList.push(new XmlNode({
                             name: node.name,
                             type:fgui.CommonName.Transition
                         }));
@@ -128,7 +128,7 @@ export default class ComponentReader
                 }
                 if(!isIgnore)
                 {
-                    resourceComponent.displayList.push(new CNode({
+                    resourceComponent.displayList.push(new XmlNode({
                         name: nodeName,
                         type: type,pkg,src
                     }));

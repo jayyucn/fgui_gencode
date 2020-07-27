@@ -1,7 +1,5 @@
 node_modules
 test
 assets
-bin
-_genCode
-bin/Main.js
+bin/bundle/**/*
 .vscode/*

@@ -1,7 +1,7 @@
 export default class Options {
     codeMemberNamePrefix: string = "m_";
     codeIgnoreNoname: boolean = true; 
-    codeIgnorIllegalClassName: boolean =   false;
+    codeIgnorIllegalClassName: boolean =   true;
     codeIgnorNoExported: boolean = true;
     codeExportDepend: boolean = true;
     codeNamespace: string = "fgui";

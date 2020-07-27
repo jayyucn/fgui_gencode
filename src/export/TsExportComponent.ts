@@ -1,5 +1,5 @@
 import ResourceComponent from "../data/ResourceComponent";
-import CNode from '../data/CNode';
+import XmlNode from '../data/XmlNode';
 import TsPathTemplate from "./TsPathTemplate";
 import FS from "../FS";
 import TsPathOut from "./TsPathOut";
@@ -65,7 +65,7 @@ export default class TsExportComponent
             setDisplayList.push(lineDis);
         }
 
-        for(let node of this.com.componentList)
+        for(let node of this.com.componentNodeList)
         {
             if(node.isIgnore)
                 continue;

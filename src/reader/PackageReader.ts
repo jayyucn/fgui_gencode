@@ -9,7 +9,6 @@ export default class PackageReader
 {
     public static Load(path: string): Package
     {
-        console.log("PackageReader:" + path);
         if(!FS.IsFile(path)) {
             console.error(`${path} is not file`);
             return;

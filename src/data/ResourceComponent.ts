@@ -1,5 +1,5 @@
 import Package from './Package';
-import CNode, {ComponentNode} from './CNode';
+import XmlNode, {ComponentNode} from './XmlNode';
 import Setting from '../Setting';
 import FS from '../FS';
 import StringUtils from '../StringUtils';
@@ -19,16 +19,16 @@ export default class ResourceComponent
     public id: string;
     public name: string;
     public path: string;
-    public exported: boolean;
+    public exported: boolean = false;
     public extention: string;
-    controllerList: CNode[] = new Array<CNode>();
-    transitionList: CNode[] = new Array<CNode>();
-    displayList: CNode[] = new Array<CNode>();
-    componentList: ComponentNode[] = new Array<ComponentNode>();
+    controllerList: XmlNode[] = new Array<XmlNode>();
+    transitionList: XmlNode[] = new Array<XmlNode>();
+    displayList: XmlNode[] = new Array<XmlNode>();
+    componentNodeList: ComponentNode[] = new Array<ComponentNode>();
     dependPackageList: Package[] = new Array<Package>();
     beDependList: ResourceComponent[] = new Array<ResourceComponent>();
 
-    public hasBeDependForExtported: boolean = false;
+    public beenDependentorExtported: boolean = false;
 
     public AddDependPackage(pkg: Package)
     {
@@ -41,7 +41,7 @@ export default class ResourceComponent
     public AddNode(node: ComponentNode)
     {
         node.parent = this;
-        this.componentList.push(node);
+        this.componentNodeList.push(node);
     }
 
     public get URL(): string
@@ -68,7 +68,7 @@ export default class ResourceComponent
             {
                 if(Setting.Options.codeExportDepend)
                 {
-                    if(!this.hasBeDependForExtported)
+                    if(!this.beenDependentorExtported)
                     {
                         return true;
                     }
@@ -124,14 +124,19 @@ export default class ResourceComponent
         {
             this._extendsImports = [FS.GetImportParams(this, true)];
             let clsName = [];
-            for (const com of this.componentList) {
+            for (const com of this.componentNodeList) {
                 let res = com.resourceComponent;
-                if(res && clsName.indexOf(res.classNameExtend) == -1)
+                if(res && res.classNameExtend == "PlaneBg") {
+                    console.log("------------qqq-----------------",res.isIgnore);
+                    res.isIgnore
+                }
+                if(res && !com.isIgnore && clsName.indexOf(res.classNameExtend) == -1)
                 {
                     this._extendsImports.push(FS.GetImportParams(res,true));
                     clsName.push(res.classNameExtend);
                 }
             }
+            
         }
         return this._extendsImports;
     }
