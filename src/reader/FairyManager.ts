@@ -1,6 +1,6 @@
 import Package from "../data/Package";
 import XmlNode,{ComponentNode} from "../data/XmlNode";
-import FS from "../FS";
+import Path from "../FS";
 import PackageReader from "./PackageReader";
 import ComponentReader from "./ComponentReader";
 import ResourceComponent from "../data/ResourceComponent";
@@ -72,12 +72,12 @@ export default class FairyManager
     public  LoadProject(projectPath: string)
     {
         let root = projectPath + "/assets";
-        let dirs: string[] = FS.GetDirectories(root);
+        let dirs: string[] = Path.GetDirectories(root);
 
         for(let i = 0;i < dirs.length;i++)
         {
             let packageXmlPath = dirs[i] + "/package.xml";
-            if(FS.Exists(packageXmlPath))
+            if(Path.Exists(packageXmlPath))
             {
                 let pkg: Package = PackageReader.Load(packageXmlPath);
                 this.AddPackage(pkg);
@@ -166,6 +166,11 @@ export default class FairyManager
         this.ExportTSExportGuiPackageNames();
         this.ExportTSExportGuiBinderList();
         this.ExportTSExportSoundKey();
+    }
+
+    public ExportRes(resPath: string) {
+        let dirs: string[] = Path.GetDirectories(root);
+
     }
 
     private ExportTSComponent()

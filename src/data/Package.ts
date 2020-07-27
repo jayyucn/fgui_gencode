@@ -2,7 +2,7 @@ import StringUtils from "../StringUtils";
 import Setting from "../Setting";
 import ResourceComponent from './ResourceComponent';
 import { ResourceComponentType } from './ResourceComponentType';
-import FS from '../FS';
+import Path from '../FS';
 
 export default class Package {
     id: string = "";
@@ -45,7 +45,7 @@ export default class Package {
         if(!this._importList) {
             this._importList = [];
             for(let com of this.exportComponents) {
-                this._importList.push(FS.GetImportParams(com,true));
+                this._importList.push(Path.GetImportParams(com,true));
             }
         }
         return this._importList;

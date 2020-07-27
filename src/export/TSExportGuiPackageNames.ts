@@ -1,7 +1,7 @@
 import Package from "../data/Package";
 import {TemplateSystem} from "../TemplateSystem";
 import TsPathTemplate from "./TsPathTemplate";
-import FS from "../FS";
+import Path from "../FS";
 import TsPathOut from "./TsPathOut";
 
 
@@ -24,14 +24,14 @@ export default class TSExportGuiPackageNames
                 importList.push([pkg.classNameBinder]);
         }
 
-        let template: TemplateSystem = new TemplateSystem(FS.ReadTxt(TsPathTemplate.GuiPackageNames));
+        let template: TemplateSystem = new TemplateSystem(Path.ReadTxt(TsPathTemplate.GuiPackageNames));
         template.AddVariable("imports",importList);
         template.AddVariable("packlist",list);
         let content = template.Parse();
         let path = TsPathOut.GuiPackageNames;
 
-        FS.CheckPath(path);
-        FS.WriteTxt(path,content);
+        Path.CheckPath(path);
+        Path.WriteTxt(path,content);
     }
 
 }

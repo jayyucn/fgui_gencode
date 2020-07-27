@@ -2,7 +2,7 @@ import ResourceComponent from "../data/ResourceComponent";
 import Parser from "../parse/Parser";
 import {fgui} from "../data/FguiComponentType";
 import XmlNode, { ComponentNode } from '../data/XmlNode';
-import FS from '../FS';
+import Path from '../FS';
 
 export default class ComponentReader
 {
@@ -10,7 +10,7 @@ export default class ComponentReader
     {
         // console.log("ComponentReader:" + path);
         
-        let xml = FS.ReadXml(path);
+        let xml = Path.ReadXml(path);
         let xmlDocument = Parser.ParseXml(xml);
         let component = xmlDocument.component;
         // 继承

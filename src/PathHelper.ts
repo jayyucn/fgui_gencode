@@ -1,4 +1,4 @@
-import FS from './FS';
+import Path from './FS';
 
 
 export default class PathHelper
@@ -19,16 +19,16 @@ export default class PathHelper
 
             if(!dir) continue;
             target += "/" + dir;
-            if(!FS.Exists(target))
+            if(!Path.Exists(target))
             {
-                FS.CreateDirectory(target);
+                Path.CreateDirectory(target);
             }
         }
     }
 
     public static  ChangeExtension( path:string, ext:string): string
     {
-        let e = FS.GetExtension(path);
+        let e = Path.GetExtension(path);
         if(!e)
         {
             return path + ext;

@@ -1,7 +1,7 @@
 import Package from './Package';
 import XmlNode, {ComponentNode} from './XmlNode';
 import Setting from '../Setting';
-import FS from '../FS';
+import Path from '../FS';
 import StringUtils from '../StringUtils';
 import {fgui} from './FguiComponentType';
 import {ResourceComponentType} from './ResourceComponentType';
@@ -92,7 +92,7 @@ export default class ResourceComponent
     {
         if(!this._className)
         {
-            let clsName = FS.GetFileNameWithoutExtension(this.name);
+            let clsName = Path.GetFileNameWithoutExtension(this.name);
             if(!Setting.Options.codeIgnorIllegalClassName)
                 clsName = clsName.replace(/[^A-Za-z0-9_]/,"")
             this._className = StringUtils.FirstUpper(clsName);
@@ -110,7 +110,7 @@ export default class ResourceComponent
         if(!this._structImports)
         {
             this._structImports = [];
-            this._structImports.push(FS.GetImportParams(this));
+            this._structImports.push(Path.GetImportParams(this));
             
         }
         return this._structImports;
@@ -122,7 +122,7 @@ export default class ResourceComponent
     {
         if(!this._extendsImports)
         {
-            this._extendsImports = [FS.GetImportParams(this, true)];
+            this._extendsImports = [Path.GetImportParams(this, true)];
             let clsName = [];
             for (const com of this.componentNodeList) {
                 let res = com.resourceComponent;
@@ -132,7 +132,7 @@ export default class ResourceComponent
                 }
                 if(res && !com.isIgnore && clsName.indexOf(res.classNameExtend) == -1)
                 {
-                    this._extendsImports.push(FS.GetImportParams(res,true));
+                    this._extendsImports.push(Path.GetImportParams(res,true));
                     clsName.push(res.classNameExtend);
                 }
             }

@@ -3,7 +3,7 @@ import * as Fse from 'fs-extra';
 import ResourceComponent from './data/ResourceComponent';
 import Setting from './Setting';
 
-export default class FS
+export default class Path
 {
     public static ReadTxt(path: string): string
     {
@@ -33,7 +33,7 @@ export default class FS
             {
                 if(!item.startsWith(Setting.Options.ignorePathPrefix))
                 {
-                    let newList = FS.ReaddirSync(itemPath,includeFileTypes,excludeFileTypes);
+                    let newList = Path.ReaddirSync(itemPath,includeFileTypes,excludeFileTypes);
                     list = list.concat(newList);
                 }
             } else if(stat.isFile() && item.endsWith('.xml'))
@@ -69,7 +69,7 @@ export default class FS
 
     public static GetDirectoryPath(path: string)
     {
-        if(FS.IsFile(path)) {
+        if(Path.IsFile(path)) {
             return path.slice(0,path.lastIndexOf('/'))
         }
         if(path.endsWith('/'))
@@ -113,9 +113,9 @@ export default class FS
             }
             if(dir) continue;
             target += "/" + dir;
-            if(!FS.Exists(target))
+            if(!Path.Exists(target))
             {
-                FS.CreateDirectory(target);
+                Path.CreateDirectory(target);
             }
         }
     }

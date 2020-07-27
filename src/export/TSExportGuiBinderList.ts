@@ -1,5 +1,5 @@
 import Package from "../data/Package";
-import FS from "../FS";
+import Path from "../FS";
 import {TemplateSystem} from "../TemplateSystem";
 import TsPathOut from "./TsPathOut";
 import TsPathTemplate from "./TsPathTemplate";
@@ -23,13 +23,13 @@ export default class TSExportGuiBinderList
         }
         
 
-        let template: TemplateSystem = new TemplateSystem(FS.ReadTxt(TsPathTemplate.GuiBinderList));
+        let template: TemplateSystem = new TemplateSystem(Path.ReadTxt(TsPathTemplate.GuiBinderList));
         template.AddVariable("imports",importList);
         template.AddVariable("packlist",list);
         let content = template.Parse();
         let path = TsPathOut.GuiBinderList;
 
-        FS.CheckPath(path);
-        FS.WriteTxt(path,content);
+        Path.CheckPath(path);
+        Path.WriteTxt(path,content);
     }
 }

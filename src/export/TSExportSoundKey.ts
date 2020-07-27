@@ -1,5 +1,5 @@
 import Package from "../data/Package";
-import FS from '../FS';
+import Path from '../FS';
 import { TemplateSystem } from "../TemplateSystem";
 import TsPathTemplate from "./TsPathTemplate";
 import TsPathOut from "./TsPathOut";
@@ -15,18 +15,18 @@ export default class TSExportSoundKey
         {
             if(!component.exported)
                 continue;
-            coms.push([component.classNameExtend,component.name,component.id,FS.GetExtension(component.name)]);
+            coms.push([component.classNameExtend,component.name,component.id,Path.GetExtension(component.name)]);
         }
 
-        let template: TemplateSystem = new TemplateSystem(FS.ReadTxt(TsPathTemplate.SoundKey));
+        let template: TemplateSystem = new TemplateSystem(Path.ReadTxt(TsPathTemplate.SoundKey));
         template.AddVariable("packageName",pkg.name);
         template.AddVariable("list",coms);
         template.AddVariable("packageId",pkg.id);
         let content = template.Parse();
         let path = TsPathOut.SoundKey;
 
-        FS.CheckPath(path);
-        FS.WriteTxt(path,content);
+        Path.CheckPath(path);
+        Path.WriteTxt(path,content);
     }
 }
 

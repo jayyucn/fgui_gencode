@@ -1,7 +1,7 @@
 import ResourceComponent from "../data/ResourceComponent";
 import XmlNode from '../data/XmlNode';
 import TsPathTemplate from "./TsPathTemplate";
-import FS from "../FS";
+import Path from "../FS";
 import TsPathOut from "./TsPathOut";
 import {TemplateSystem} from "../TemplateSystem";
 export interface ILines {
@@ -86,14 +86,14 @@ export default class TsExportComponent
         dependPackages = dependPackageList.toString();
 
 
-        let template = new TemplateSystem(FS.ReadTxt(TsPathTemplate.ComponentStruct));
+        let template = new TemplateSystem(Path.ReadTxt(TsPathTemplate.ComponentStruct));
         template.AddVariable("imports", com.extendsImports);
         template.AddVariable("classNameFGUI", com.classNameFGUI);
         template.AddVariable("classNameStruct", com.classNameStruct);
         template.AddVariable("classNameExtend", com.classNameExtend);
         template.AddVariable("packagename", com.packageName);
         template.AddVariable("dependPackages", dependPackages);
-        template.AddVariable("comname", FS.GetFileNameWithoutExtension(com.name));
+        template.AddVariable("comname", Path.GetFileNameWithoutExtension(com.name));
         template.AddVariable("URL", com.URL);
         template.AddVariable("fields", fields);
         template.AddVariable("setControllerList", setControllerList);
@@ -103,8 +103,8 @@ export default class TsExportComponent
         let structPath = TsPathOut.ComponentStruct;
         let folderName = com.package.codeFolderName;
         let path = structPath.format(folderName,this.name);
-        FS.CheckPath(path);
-        FS.WriteTxt(path, content);
+        Path.CheckPath(path);
+        Path.WriteTxt(path, content);
     }
 
     /// <summary>
@@ -113,7 +113,7 @@ export default class TsExportComponent
     private ExportExtend()
     {
         let com = this.com;
-        let template: TemplateSystem = new TemplateSystem(FS.ReadTxt(TsPathTemplate.ComponentExtend));
+        let template: TemplateSystem = new TemplateSystem(Path.ReadTxt(TsPathTemplate.ComponentExtend));
         template.AddVariable("imports", com.structImports);
         template.AddVariable("classNameFGUI", com.classNameFGUI);
         template.AddVariable("classNameStruct", com.classNameStruct);
@@ -121,8 +121,8 @@ export default class TsExportComponent
         let content = template.Parse();
         let path = TsPathOut.ComponentExtend.format(com.package.codeFolderName,this.name);
 
-        FS.CheckPath(path);
-        FS.WriteTxt(path, content);
+        Path.CheckPath(path);
+        Path.WriteTxt(path, content);
     }
 
 }

@@ -21,12 +21,23 @@ export default class Main {
         // Parser.ParseXml(file);
 
         let mgr = new FairyManager();
+        let clientPath = "";
+        let assetPath = "";
+        let resPath = "";
         if (OS.platform() == "darwin") {
-            mgr.LoadProject('/Users/jay/projects/client/arts_project/Game-FGUI');
-            // mgr.LoadProject('./bin/');
+            clientPath = "/Users/jay/projects/client/";
+            assetPath = "arts_project/Game-FGUI";
+            resPath = "client/Game/bin/res/fgui";
         } else
-            mgr.LoadProject('E:\\workspace\\JJSGDNF\\client\\arts_project\\Game-FGUI');
+        {
+            clientPath = "E:\\workspace\\JJSGDNF\\client\\";
+            assetPath = "arts_project\\Game-FGUI";
+            resPath = "client\\Game\\bin\\res\\fgui";
+        }
+        mgr.LoadProject(clientPath + assetPath);
         mgr.ExportTS();
+
+        mgr.ExportRes(clientPath + resPath);
 
         // let src = "./bin/assets/Component~NCode/GoButton.xml";
         // let exist = FS.Exists(src);
