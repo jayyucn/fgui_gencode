@@ -1,4 +1,4 @@
-import Path from './FS';
+import Path from './Path';
 
 
 export default class PathHelper

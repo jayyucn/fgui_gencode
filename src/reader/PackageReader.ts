@@ -1,5 +1,5 @@
 import Package from '../data/Package';
-import Path from '../FS';
+import Path from '../Path';
 import Parser from '../parse/Parser';
 import { INode } from '../parse/XmlFile';
 import ResourceComponent from '../data/ResourceComponent';

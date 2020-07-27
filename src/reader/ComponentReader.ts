@@ -2,7 +2,7 @@ import ResourceComponent from "../data/ResourceComponent";
 import Parser from "../parse/Parser";
 import {fgui} from "../data/FguiComponentType";
 import XmlNode, { ComponentNode } from '../data/XmlNode';
-import Path from '../FS';
+import Path from '../Path';
 
 export default class ComponentReader
 {

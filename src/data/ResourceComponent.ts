@@ -1,7 +1,7 @@
 import Package from './Package';
 import XmlNode, {ComponentNode} from './XmlNode';
 import Setting from '../Setting';
-import Path from '../FS';
+import Path from '../Path';
 import StringUtils from '../StringUtils';
 import {fgui} from './FguiComponentType';
 import {ResourceComponentType} from './ResourceComponentType';

@@ -2,7 +2,7 @@ import StringUtils from "../StringUtils";
 import Setting from "../Setting";
 import ResourceComponent from './ResourceComponent';
 import { ResourceComponentType } from './ResourceComponentType';
-import Path from '../FS';
+import Path from '../Path';
 
 export default class Package {
     id: string = "";

@@ -1,6 +1,6 @@
 import Package from "../data/Package";
 import XmlNode,{ComponentNode} from "../data/XmlNode";
-import Path from "../FS";
+import Path from "../Path";
 import PackageReader from "./PackageReader";
 import ComponentReader from "./ComponentReader";
 import ResourceComponent from "../data/ResourceComponent";

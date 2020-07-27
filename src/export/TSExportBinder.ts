@@ -1,5 +1,5 @@
 import Package from "../data/Package";
-import Path from '../FS';
+import Path from '../Path';
 import TsPathTemplate from "./TsPathTemplate";
 import TsPathOut from "./TsPathOut";
 import { TemplateSystem } from "../TemplateSystem";
