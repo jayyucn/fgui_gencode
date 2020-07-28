@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "fgui生成ts代码",
   "main": "index.js",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/nalanrola" },
   "scripts": {
     "tsc": "tsc",
     "run": "tsc && npm run runjs",
