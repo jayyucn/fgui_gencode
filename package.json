@@ -20,8 +20,5 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
-  "repository": {
-      "type": "git",
-      "url": "git@github.com:nalanrola/fgui_gencode.git"
-  }
+  "repository": "git://github.com/nalanrola/fgui_gencode.git"
 }
