@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "fgui生成ts代码",
   "main": "index.js",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/nalanrola/" },
   "scripts": {
     "tsc": "tsc",
     "run": "tsc && npm run runjs",
@@ -18,5 +17,11 @@
     "fast-xml-parser": "^3.17.4",
     "he": "^1.2.0"
   },
-  "repository": "git@github.com:nalanrola/fgui_gencode.git"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git@github.com:nalanrola/fgui_gencode.git"
+  }
 }
