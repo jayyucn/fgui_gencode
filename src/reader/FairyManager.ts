@@ -170,19 +170,48 @@ export default class FairyManager
 
     public ExportRes(resPath: string) {
         let resList: string[] = Path.GetFGUIResList(resPath);
-        let resMap: Map<string, string[]> = new Map<string, string[]>();
-        let pkgList = [];
-        for (let index = 0; index < resList.length; index++) {
+        resList.sort();
+        let obj = {};
+        obj['res'] = resList;
+        let resMap: Map<number,string> = new Map<number,string>();
+        let indexMap: Map<string,number> = new Map<string,number>();
+        let map: Map<string, number[]> = new Map<string, number[]>();
+        let soundList = [];
+        let binList = [];
+        for(let index = 0;index < resList.length;index++)
+        {
             let res = resList[index];
-            if(res.endsWith('.'+Setting.Options.fguiFileExtension)) {
-                if(pkgList.indexOf(res) == -1) {
-                    pkgList.push(res);
-                    resList.splice(index,1);
-                }
+            let pkgName = "";
+            if(res.startsWith('Sound')) {
+                soundList.push(res);
             }
+            else if(res.endsWith('.' + Setting.Options.fguiFileExtension)) {
+                binList.push(index);
+            }else if(res.endsWith('.png') || res.endsWith('.jpg')) {
+                pkgName = res.slice(0,res.indexOf('_atlas'));
+                if(!map.has(pkgName))
+                    map.set(pkgName, []);
+                map.get(pkgName).push(index);
+            }
+            resMap.set(index,res);
+            indexMap.set(res,index);
         }
-       
-
+        let pkgs = obj['pkgs'] = {};
+        for(let pkg of this.packageList)
+        {
+            let dependList = [];
+            for(let p of pkg.dependPackages) {
+                let list = map.get(p.name);
+                if(!list)
+                    continue;
+                dependList = dependList.concat(list);
+            }
+            if(dependList.length > 0)
+                pkgs[pkg.name] = dependList;
+        }
+        obj['bins'] = binList;
+        Path.WriteJson('./test2.json', obj);
+        
     }
 
     private ExportTSComponent()

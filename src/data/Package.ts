@@ -19,6 +19,21 @@ export default class Package {
         return this.components;
     }
 
+    private _dependPackages: Package[];
+    public get dependPackages(): Package[] {
+        if(!this._dependPackages || this._dependPackages.length == 0) {
+            this._dependPackages = [];
+            let map = new Map<string, Package>();
+            for(let com of this.exportComponents) {
+                for(let pkg of com.dependPackageList) {
+                    map.set(pkg.name, pkg);
+                }
+            }
+            this._dependPackages = [...map.values()];
+        }
+        return this._dependPackages;
+    }
+
     public AddResource(res: ResourceComponent) {
         res.package = this;
         this.resources.set(res.id, res);

@@ -1,13 +1,22 @@
 import OS from 'os';
 import FairyManager from './reader/FairyManager';
+import Path from './Path';
 
 export default class Main {
     constructor() {
 
-        this.Init();
+        // this.test();
     }
 
-    Init() {
+    test() {
+        let arr = ['aaaa.png', 'bbb.png', 'ccc.png'];
+        let obj = {
+            res: arr
+        }
+        Path.WriteJson('./test.json', obj);
+    }
+
+    static Init(clientPath: string) {
         // let packagesPaths = FS.GetDirectories(Config.FGUI_ASSET_PATH);
         // let list = FileSystem.ReaddirSync(packagesPaths[0])
         // console.log(list)
@@ -19,9 +28,8 @@ export default class Main {
         // let file = readFileSync('./bin/assets/CommonBase/Button/CommonButton.xml',{encoding: 'utf-8'})
         // Parser.ParseXml(file);
         // Parser.ParseXml(file);
-
+        
         let mgr = new FairyManager();
-        let clientPath = "";
         let assetPath = "";
         let resPath = "";
         if (OS.platform() == "darwin") {

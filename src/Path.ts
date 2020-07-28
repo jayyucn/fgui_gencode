@@ -17,6 +17,10 @@ export default class Path
         // return readFileSync(path,{encoding: 'utf-8'});
     }
 
+    public static WriteJson(path: string, jsonString: any) {
+        Fse.writeJsonSync(path,jsonString);
+    }
+
     public static ReadXml(path: string):string {
         return readFileSync(path, {encoding: 'utf-8'});
     }
@@ -66,7 +70,7 @@ export default class Path
             let itemPath = resPath + '/' + item;
             let stat = statSync(itemPath);
             if(stat && stat.isFile())
-                list.push(itemPath);
+                list.push(item);
         }
         return list;
     }
