@@ -1,4 +1,3 @@
-import OS from 'os';
 import FairyManager from './reader/FairyManager';
 import Path from './Path';
 import Setting from './Setting';
