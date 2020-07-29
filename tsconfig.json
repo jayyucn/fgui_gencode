@@ -16,10 +16,10 @@
   },
     "include": [
       "src/**/*",
-      "libs/**/*"
     ],
     "exclude": [
       "node_modules",
-      "**/*.spec.ts"
+      "**/*.spec.ts",
+      "**/__tests__/*"
     ]
 }

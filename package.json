@@ -1,13 +1,13 @@
 {
   "name": "code-fgui",
-  "version": "1.0.3",
+  "version": "1.0.11",
   "description": "This is a code generator for fairygui project",
   "bin": {
-    "code-fgui": "node bin/code4fgui"
+    "code-fgui": "./bin/code4fgui.js"
   },
   "main": "index.js",
   "scripts": {
-    "tsc": "tsc",
+    "build": "tsc",
     "test": "node ./bin/test.js"
   },
   "author": "nalanrola",
@@ -25,6 +25,9 @@
   },
   "repository": "git://github.com/nalanrola/fgui_gencode.git",
   "devDependencies": {
+    "@types/jest": "^26.0.7",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.4",
     "typescript": "^3.9.7"
   }
 }
