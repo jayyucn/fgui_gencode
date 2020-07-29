@@ -104,8 +104,10 @@ export default class Path
     }
 
     public static IsFile(path: string) {
+        if(!Fse.pathExistsSync(path))
+            return false
         let stat = statSync(path);
-        return stat.isFile();
+        return stat && stat.isFile();
     }
 
     public static IsDirectory(path: string) {

@@ -2,6 +2,7 @@ import OS from 'os';
 import FairyManager from './reader/FairyManager';
 import Path from './Path';
 import Setting from './Setting';
+import * as Fse from 'fs-extra';
 
 export default class Main {
     constructor() {
@@ -20,13 +21,13 @@ export default class Main {
     static Init(clientPath: string, output: string, templatePath: string) {
         if(!Path.IsDirectory(clientPath))
             throw new Error(`project path url not found: ${clientPath}`);
-        if(!Path.IsDirectory(output))
-            throw new Error(`output path url not found: ${output}`);
+        Fse.ensureDir(output);
         if(!Path.IsDirectory(templatePath))
             throw new Error(`output path url not found: ${templatePath}`);
         if(!clientPath.endsWith('/'))
             clientPath += '/';
         Setting.Options.codePath = output;
+        
         Setting.Options.templateDir = templatePath;
         let mgr = new FairyManager();
 

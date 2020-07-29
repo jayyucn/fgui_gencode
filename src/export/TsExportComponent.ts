@@ -113,14 +113,15 @@ export default class TsExportComponent
     private ExportExtend()
     {
         let com = this.com;
+        let path = TsPathOut.ComponentExtend.format(com.package.codeFolderName,this.name);
+        if(Path.IsFile(path))
+            return;
         let template: TemplateSystem = new TemplateSystem(Path.ReadTxt(TsPathTemplate.ComponentExtend));
         template.AddVariable("imports", com.structImports);
         template.AddVariable("classNameFGUI", com.classNameFGUI);
         template.AddVariable("classNameStruct", com.classNameStruct);
         template.AddVariable("classNameExtend", com.classNameExtend);
         let content = template.Parse();
-        let path = TsPathOut.ComponentExtend.format(com.package.codeFolderName,this.name);
-
         Path.CheckPath(path);
         Path.WriteTxt(path, content);
     }
