@@ -1,16 +1,14 @@
 {
   "name": "code-fgui",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "This is a code generator for fairygui project",
   "bin": {
-    "code-fgui": "bin/code4fgui.js"
+    "code-fgui": "node bin/code4fgui"
   },
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "run": "tsc && npm run runjs",
-    "test": "node ./bin/test.js",
-    "test2": "node ./bin/fgui_gencode.js"
+    "test": "node ./bin/test.js"
   },
   "author": "nalanrola",
   "license": "ISC",
