@@ -1,12 +1,19 @@
 #!/usr/bin/env node
+
 const program = require('commander');
-const Main = require('./bundle/Main')
+const { default: Main } = require('./bundle/Main');
+require('./libs/StringExtends');
 
 program
     .version('1.0.11', '-v, --version')
-    .command('gencode <project> [output]')
-    .description('生成fgui的代码，参数1为fgui工程根目录, 参数2位代码 输出目录')
-    .action((project, output)=>{
-        Main.Init(project, output);
-    })
+    .usage("示例：code-fgui -p path-of-client -o path-of-output -t path-of-template")
+    .option('-p --project-path <in>', "[必填] 客户端工程根目录")
+    .option('-o --output-path <out>', "[必填] 代码输出目录")
+    .option('-t --template-Path <tp>', "[必填] 代码模板目录")
     .parse(process.argv);
+
+if (!program.projectPath)
+    throw new Error("缺少参数：-p [client path]客户端地址,可填相对地址");
+if (!program.outputPath)
+    throw new Error("缺少参数：-o [output path]代码输出地址,可填相对地址");
+Main.Init(program.projectPath, program.outputPath);

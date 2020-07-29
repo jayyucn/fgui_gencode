@@ -1,6 +1,7 @@
 import OS from 'os';
 import FairyManager from './reader/FairyManager';
 import Path from './Path';
+import Setting from './Setting';
 
 export default class Main {
     constructor() {
@@ -23,7 +24,7 @@ export default class Main {
             throw new Error(`output path url not found: ${output}`);
         if(!clientPath.endsWith('/'))
             clientPath += '/';
-        
+        Setting.Options.codePath = output;
         let mgr = new FairyManager();
 
         let assetPath = clientPath + "arts_project/Game-FGUI";
