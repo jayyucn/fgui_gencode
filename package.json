@@ -1,7 +1,10 @@
 {
-  "name": "code4fgui",
+  "name": "code-fgui",
   "version": "1.0.0",
   "description": "This is a code generator for fairygui project",
+  "bin": {
+    "code-fgui": "bin/code4fgui.js"
+  },
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
