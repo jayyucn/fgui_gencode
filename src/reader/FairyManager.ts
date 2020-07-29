@@ -210,8 +210,7 @@ export default class FairyManager
                 pkgs[pkg.name] = dependList;
         }
         obj['bins'] = binList;
-        Path.WriteJson('./test2.json', obj);
-        
+        Path.WriteJson(Setting.Options.fguiExportJsonPath, obj);
     }
 
     private ExportTSComponent()

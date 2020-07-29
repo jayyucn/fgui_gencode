@@ -3,3 +3,4 @@ test
 assets
 bin/bundle/**/*
 .vscode/*
+package-lock.json

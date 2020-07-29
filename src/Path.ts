@@ -18,6 +18,7 @@ export default class Path
     }
 
     public static WriteJson(path: string, jsonString: any) {
+        Fse.ensureFileSync(path);
         Fse.writeJsonSync(path,jsonString);
     }
 

@@ -14,4 +14,6 @@ export default class Options {
     ignorePathPrefix: string = "_";
 
     fguiFileExtension: string = "bin";
+    fguiExportJsonPath: string = "../_genCode/Json/fgui.json"
+
 }
