@@ -17,14 +17,17 @@ export default class Main {
         Path.WriteJson('./test.json', obj);
     }
 
-    static Init(clientPath: string, output: string) {
+    static Init(clientPath: string, output: string, templatePath: string) {
         if(!Path.IsDirectory(clientPath))
             throw new Error(`project path url not found: ${clientPath}`);
         if(!Path.IsDirectory(output))
             throw new Error(`output path url not found: ${output}`);
+        if(!Path.IsDirectory(templatePath))
+            throw new Error(`output path url not found: ${templatePath}`);
         if(!clientPath.endsWith('/'))
             clientPath += '/';
         Setting.Options.codePath = output;
+        Setting.Options.templateDir = templatePath;
         let mgr = new FairyManager();
 
         let assetPath = clientPath + "arts_project/Game-FGUI";

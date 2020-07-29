@@ -16,4 +16,7 @@ if (!program.projectPath)
     throw new Error("缺少参数：-p [client path]客户端地址,可填相对地址");
 if (!program.outputPath)
     throw new Error("缺少参数：-o [output path]代码输出地址,可填相对地址");
+if (!program.templatePath)
+    throw new Error("缺少参数：-o [output path]代码输出地址,可填相对地址");
+
 Main.Init(program.projectPath, program.outputPath);
