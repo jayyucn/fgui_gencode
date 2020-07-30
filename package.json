@@ -1,9 +1,9 @@
 {
-  "name": "code-fgui",
-  "version": "1.0.19",
+  "name": "code4fgui",
+  "version": "1.0.27",
   "description": "This is a code generator for fairygui project",
   "bin": {
-    "code-fgui": "./bin/code4fgui.js"
+    "code4fgui": "./bin/code4fgui.js"
   },
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "author": "nalanrola",
   "license": "ISC",
-  "files": ["bin/**/*","node_modules"],
+  "files": ["bin/**/*","node_modules/**/*"],
   "dependencies": {
     "@types/fs-extra": "^9.0.1",
     "@types/node": "^14.0.24",
