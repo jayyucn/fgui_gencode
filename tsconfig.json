@@ -1,18 +1,14 @@
 {
   "compilerOptions": {
 
-    "target": "es2020",
+    "target": "es6",
     "module": "commonjs",
+    "noEmitHelpers": true,
     "outDir": "./bin/bundle/",
-    "strict": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
-    "noImplicitThis": false,  
-    "esModuleInterop": true,
     "inlineSourceMap": true,
     "inlineSources": true,  
-    "skipLibCheck": true,   
-    "forceConsistentCasingInFileNames": true
   },
     "include": [
       "src/**/*",

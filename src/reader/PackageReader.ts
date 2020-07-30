@@ -7,7 +7,7 @@ import {ResourceComponentType} from '../data/ResourceComponentType';
 
 export default class PackageReader
 {
-    public static Load(path: string): Package
+    public static Load(path: string)
     {
         if(!Path.IsFile(path)) {
             console.error(`${path} is not file`);

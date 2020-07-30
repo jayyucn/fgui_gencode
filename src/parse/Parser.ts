@@ -1,4 +1,4 @@
-import XmlParser2 from "fast-xml-parser";
+import {parse as Parse} from "fast-xml-parser";
 import {XmlDocument} from './XmlFile';
 
 export default class Parser
@@ -23,7 +23,7 @@ export default class Parser
     };
 
     static ParseXml(xmlString: string): XmlDocument {
-            let file: XmlDocument = XmlParser2.parse(xmlString,Parser.options);
+            let file: XmlDocument = Parse(xmlString,Parser.options);
             // console.log('parseXml-> file = ', file)
             return file;
     }

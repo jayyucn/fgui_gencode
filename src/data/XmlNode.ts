@@ -48,15 +48,15 @@ export class ComponentNode extends XmlNode{
     constructor(param:{
         name: string,
         type: string,
-        pkg: string, 
-        src: string
+        pkg?: string, 
+        src?: string
     }) {
         super(param);
     }
 
     
-    public parent: ResourceComponent;
-    public resourceComponent: ResourceComponent;
+    public parent?: ResourceComponent;
+    public resourceComponent?: ResourceComponent;
 
     public GetType(com: ResourceComponent) {
         let resourceComponent = this.resourceComponent;

@@ -127,7 +127,6 @@ export default class ResourceComponent
             for (const com of this.componentNodeList) {
                 let res = com.resourceComponent;
                 if(res && res.classNameExtend == "PlaneBg") {
-                    console.log("------------qqq-----------------",res.isIgnore);
                     res.isIgnore
                 }
                 if(res && !com.isIgnore && clsName.indexOf(res.classNameExtend) == -1)

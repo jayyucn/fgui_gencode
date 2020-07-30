@@ -19,10 +19,9 @@ export default class Package {
         return this.components;
     }
 
-    private _dependPackages: Package[];
+    private _dependPackages: Package[] = [];
     public get dependPackages(): Package[] {
-        if(!this._dependPackages || this._dependPackages.length == 0) {
-            this._dependPackages = [];
+        if(this._dependPackages.length == 0) {
             let map = new Map<string, Package>();
             for(let com of this.exportComponents) {
                 for(let pkg of com.dependPackageList) {
@@ -49,13 +48,13 @@ export default class Package {
         }
     }
     
-    public GetResource(resId: string): ResourceComponent {
+    public GetResource(resId: string) {
         if(this.resources.has(resId))
             return this.resources.get(resId);
         return null;
     }
 
-    private _importList: any[];
+    private _importList: any[] = [];
     public get importList(): any[] {
         if(!this._importList) {
             this._importList = [];
@@ -66,7 +65,7 @@ export default class Package {
         return this._importList;
     }
 
-    private _codeFolderName: string;
+    private _codeFolderName: string = "";
     public get codeFolderName(): string
     {
         if(!this._codeFolderName)
@@ -80,7 +79,7 @@ export default class Package {
         this._codeFolderName = v;
     }
 
-    private _nameSpace: string;
+    private _nameSpace: string = "";
     public get nameSpace(): string
     {
         if(!this._nameSpace)
@@ -97,7 +96,7 @@ export default class Package {
     }
 
 
-    private _classNameBinder: string;
+    private _classNameBinder: string = "";
     public get classNameBinder(): string
     {
         if(!this._classNameBinder)

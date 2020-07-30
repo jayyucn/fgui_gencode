@@ -42,7 +42,7 @@ export default class FairyManager
         return null;
     }
 
-    public GetRescoureComponent(nodeOrId: string | ComponentNode,resId?: string): ResourceComponent
+    public GetRescoureComponent(nodeOrId: string | ComponentNode,resId?: string)
     {
         if(!nodeOrId)
             return;
@@ -58,15 +58,15 @@ export default class FairyManager
             {
                 return pkg.GetResource(node.src);
             }
-            return null;
+            return;
         }
         let packageId = nodeOrId;
         let pkg: Package = this.GetPackage(packageId);
-        if(pkg != null)
+        if(pkg != null && resId)
         {
             return pkg.GetResource(resId);
         }
-        return null;
+        return;
     }
 
     public  LoadProject(projectPath: string)
@@ -79,8 +79,8 @@ export default class FairyManager
             let packageXmlPath = dirs[i] + "/package.xml";
             if(Path.Exists(packageXmlPath))
             {
-                let pkg: Package = PackageReader.Load(packageXmlPath);
-                this.AddPackage(pkg);
+                let pkg = PackageReader.Load(packageXmlPath);
+                pkg && this.AddPackage(pkg);
             }
         }
         this.LoadComponent();
@@ -108,13 +108,12 @@ export default class FairyManager
             {
                 for(let node of component.componentNodeList)
                 {
-                    node.resourceComponent = this.GetRescoureComponent(node);
-                    if(node.resourceComponent == null)
-                    {
+                    let res = this.GetRescoureComponent(node);
+                    if(!res)
                         console.warn(`没有找到 resourceComponent  packagename= ${node.parent.package.name} comname= ${node.parent.name} nodename=${node.name}`);
-                    }
                     else
                     {
+                        node.resourceComponent  = res;
                         // 添加被依赖
                         node.resourceComponent.beDependList.push(component);
                         if(component.exported)
@@ -161,6 +160,7 @@ export default class FairyManager
 
     public ExportTS()
     {
+        
         this.ExportTSComponent();
         this.ExportTSBinder();
         this.ExportTSExportGuiPackageNames();
@@ -175,9 +175,9 @@ export default class FairyManager
         obj['res'] = resList;
         let resMap: Map<number,string> = new Map<number,string>();
         let indexMap: Map<string,number> = new Map<string,number>();
-        let map: Map<string, number[]> = new Map<string, number[]>();
-        let soundList = [];
-        let binList = [];
+        let tempMap: Map<string, number[]> = new Map<string, number[]>();
+        let soundList: string[] = [];
+        let binList: number[] = [];
         for(let index = 0;index < resList.length;index++)
         {
             let res = resList[index];
@@ -189,9 +189,9 @@ export default class FairyManager
                 binList.push(index);
             }else if(res.endsWith('.png') || res.endsWith('.jpg')) {
                 pkgName = res.slice(0,res.indexOf('_atlas'));
-                if(!map.has(pkgName))
-                    map.set(pkgName, []);
-                map.get(pkgName).push(index);
+                if(!tempMap.has(pkgName))
+                    tempMap.set(pkgName, []);
+                tempMap.get(pkgName).push(index);
             }
             resMap.set(index,res);
             indexMap.set(res,index);
@@ -201,7 +201,7 @@ export default class FairyManager
         {
             let dependList = [];
             for(let p of pkg.dependPackages) {
-                let list = map.get(p.name);
+                let list = tempMap.get(p.name);
                 if(!list)
                     continue;
                 dependList = dependList.concat(list);
