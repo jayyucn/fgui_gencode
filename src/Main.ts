@@ -20,14 +20,13 @@ export default class Main {
     static Init(clientPath: string, output: string, templatePath: string) {
         if(!Path.IsDirectory(clientPath))
             throw new Error(`project path url not found: ${clientPath}`);
-        Fse.ensureDir(output);
-        if(!Path.IsDirectory(templatePath))
-            throw new Error(`output path url not found: ${templatePath}`);
+        if(!Fse.pathExistsSync(output))
+            Fse.ensureDir(output);
         if(!clientPath.endsWith('/'))
             clientPath += '/';
         Setting.Options.codePath = output;
-        
-        Setting.Options.templateDir = templatePath;
+        if(templatePath)
+            Setting.Options.templateDir = templatePath;
         let mgr = new FairyManager();
 
         let assetPath = clientPath + "arts_project/Game-FGUI";
