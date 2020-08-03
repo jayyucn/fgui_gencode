@@ -37,6 +37,8 @@ export default class Main {
 
         mgr.ExportRes(resPath);
 
+
+        mgr.CopyToClient();
         // let src = "./bin/assets/Component~NCode/GoButton.xml";
         // let exist = FS.Exists(src);
         // console.log(exist)

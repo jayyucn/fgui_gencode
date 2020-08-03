@@ -213,6 +213,11 @@ export default class FairyManager
         Path.WriteJson(Setting.Options.fguiExportJsonPath, obj);
     }
 
+    public CopyToClient() {
+        let codePath = Setting.Options.codePath + "/TS";
+        let outputPath = Setting.Options.codeOutPut;
+    }
+
     private ExportTSComponent()
     {
         for(let pkg of this.packageList)

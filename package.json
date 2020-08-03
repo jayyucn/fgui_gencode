@@ -1,6 +1,6 @@
 {
   "name": "code4fgui",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "This is a code generator for fairygui project",
   "bin": {
     "code4fgui": "./bin/code4fgui.js"

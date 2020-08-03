@@ -6,7 +6,9 @@ export default class Options {
     codeExportDepend: boolean = true;
     codeNamespace: string = "fgui";
     codeUseOtherPkgType: boolean = false;
-    codePath: string = "../_genCode";
+    codePath: string = "../../_gen/_genCode";
+    codeTmp: string = "../../_gen/"
+    codeOutPut: string = "";
     soundPackageName: string = "Sound";
 
     templateDir: string = "./template";
